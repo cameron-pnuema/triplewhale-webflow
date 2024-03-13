@@ -131,7 +131,7 @@ onSuccessSubmissionBtn.addEventListener("click", onSuccessSubmission);
 
 const makeRequestToChatGPT = async (prompText) => {
   try {
-    const API_URL = `https://sea-turtle-app-uzgks.ondigitalocean.app/generate-response`;
+    const API_URL = `https://orca-app-68e48.ondigitalocean.app/generate-response`;
 
     const resp = await fetch(API_URL, {
       method: "POST",
