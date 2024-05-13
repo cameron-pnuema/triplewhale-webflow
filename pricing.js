@@ -766,6 +766,46 @@ const handleScroll = () => {
 /**
  * Function Calls
  */
+// 
+function hidePriceElements() {
+    const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
+    priceElements.forEach(element => {
+        element.style.display = 'none'; // Hide the price elements
+    });
+}
+
+function showPriceElements() {
+    const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
+    priceElements.forEach(element => {
+        element.style.display = ''; // Restore the default display style
+    });
+}
+
+//
+document.addEventListener('DOMContentLoaded', function() {
+    hidePriceElements(); // Hide prices on initial load
+});
+
+//
+const allOptions = document.querySelectorAll(".pricing-dropdown-item");
+allOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+        lastClickedCard = '';
+        removeRecommendedBorderFromCards();
+        isOpen = true;
+        
+        const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
+        const range = option.getAttribute("fd-custom-range");
+        getElement("selected-price").innerText = `${option.innerText}`;
+        getElement("selected-price-wrapper").classList.remove("is-open");
+        handleSliderChange(priceVal);
+        setCardsPriceValue(range);
+        getElement("pricing-dropdowns").style.display = "none";
+        
+        showPriceElements(); // Show the price elements after a selection is made
+    });
+});
+
 
 initSliderAnimation();
 addListenerToCards();
