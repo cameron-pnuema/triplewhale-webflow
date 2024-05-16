@@ -810,22 +810,33 @@ allOptions.forEach((option) => {
 
 // function to dynamically set mplementation Specialist (1:1 Onboarding) text
 function updateOnboardingText(priceVal) {
-    const onboardingElement = document.getElementById('implevsOnboarding');
-    if (!onboardingElement) return; // If the element is not found, do nothing
+    const onboardingElements = [
+        document.getElementById('implevsOnboarding'),
+        document.getElementById('implevsOnboarding2'),
+        document.getElementById('implevsOnboarding3')
+    ];
 
-    if (priceVal <= 500000) {
-        onboardingElement.innerText = "Group Onboarding";
-    } else if (priceVal > 500000) {
-        onboardingElement.innerText = "Implementation Specialist";
-    }
+    onboardingElements.forEach(element => {
+        if (!element) return; // Skip if the element is not found
+
+        if (priceVal <= 500000) {
+            element.innerText = "Group Onboarding";
+        } else if (priceVal > 500000) {
+            element.innerText = "Implementation Specialist";
+        }
+    });
 }
 
 //
 function setDefaultUIElements() {
     hideElementsByIds(); // Hide elements function from earlier
     setDefaultPriceText(); // Set default text for price elements
-    document.getElementById('implevsOnboarding').innerText = "Implementation Specialist (1:1 Onboarding)";
+    const defaultText = "Implementation Specialist (1:1 Onboarding)";
+    document.getElementById('implevsOnboarding').innerText = defaultText;
+    document.getElementById('implevsOnboarding2').innerText = defaultText;
+    document.getElementById('implevsOnboarding3').innerText = defaultText;
 }
+
 
 //
 const allOptions = document.querySelectorAll(".pricing-dropdown-item");
@@ -845,7 +856,7 @@ allOptions.forEach((option) => {
         showElementsByIds(); // Show the elements with inline display
         getElement("pricing-dropdowns").style.display = "none";
 
-        updateOnboardingText(priceVal); // Update the onboarding text based on the price
+        updateOnboardingText(priceVal); // Update the onboarding text for all relevant elements
     });
 });
 
