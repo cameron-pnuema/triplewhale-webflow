@@ -808,6 +808,49 @@ allOptions.forEach((option) => {
     });
 });
 
+// function to dynamically set mplementation Specialist (1:1 Onboarding) text
+function updateOnboardingText(priceVal) {
+    const onboardingElement = document.getElementById('implevsOnboarding');
+    if (!onboardingElement) return; // If the element is not found, do nothing
+
+    if (priceVal <= 500000) {
+        onboardingElement.innerText = "Group Onboarding";
+    } else if (priceVal > 500000) {
+        onboardingElement.innerText = "Implementation Specialist";
+    }
+}
+
+//
+function setDefaultUIElements() {
+    hideElementsByIds(); // Hide elements function from earlier
+    setDefaultPriceText(); // Set default text for price elements
+    document.getElementById('implevsOnboarding').innerText = "Implementation Specialist (1:1 Onboarding)";
+}
+
+//
+const allOptions = document.querySelectorAll(".pricing-dropdown-item");
+allOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+        lastClickedCard = '';
+        removeRecommendedBorderFromCards();
+        isOpen = true;
+        
+        const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
+        const range = option.getAttribute("fd-custom-range");
+        getElement("selected-price").innerText = `${option.innerText}`;
+        getElement("selected-price-wrapper").classList.remove("is-open");
+        handleSliderChange(priceVal);
+        const { growth, pro, enterprise } = setCardsPriceValue(range);
+        updateUIElements(growth, pro, enterprise);
+        showElementsByIds(); // Show the elements with inline display
+        getElement("pricing-dropdowns").style.display = "none";
+
+        updateOnboardingText(priceVal); // Update the onboarding text based on the price
+    });
+});
+
+
+
 initSliderAnimation();
 addListenerToCards();
 
