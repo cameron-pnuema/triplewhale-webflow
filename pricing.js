@@ -767,23 +767,27 @@ const handleScroll = () => {
  * Function Calls
  */
 // 
-function hidePriceElements() {
+function setDefaultPriceElements() {
     const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
     priceElements.forEach(element => {
-        element.style.display = 'none'; // Hide the price elements
+        element.innerText = 'Pick Your Plan'; // Set default text
     });
 }
 
-function showPriceElements() {
-    const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
-    priceElements.forEach(element => {
-        element.style.display = ''; // Restore the default display style
-    });
+function updatePriceElements(growth, pro, enterprise) {
+    const growthPrices = document.querySelectorAll('[fd-custom-code="growth-price"]');
+    const proPrices = document.querySelectorAll('[fd-custom-code="pro-price"]');
+    const enterprisePrices = document.querySelectorAll('[fd-custom-code="enterprise-price"]');
+
+    growthPrices.forEach(node => node.innerText = growth);
+    proPrices.forEach(node => node.innerText = pro);
+    enterprisePrices.forEach(node => node.innerText = enterprise);
 }
+
 
 //
 document.addEventListener('DOMContentLoaded', function() {
-    hidePriceElements(); // Hide prices on initial load
+    setDefaultPriceElements(); // Set default text on initial load
 });
 
 //
@@ -799,12 +803,12 @@ allOptions.forEach((option) => {
         getElement("selected-price").innerText = `${option.innerText}`;
         getElement("selected-price-wrapper").classList.remove("is-open");
         handleSliderChange(priceVal);
-        setCardsPriceValue(range);
+        const { growth, pro, enterprise } = setCardsPriceValue(range);
+        updatePriceElements(growth, pro, enterprise);
         getElement("pricing-dropdowns").style.display = "none";
-        
-        showPriceElements(); // Show the price elements after a selection is made
     });
 });
+
 
 
 initSliderAnimation();
