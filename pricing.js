@@ -782,7 +782,7 @@ function showElementsByIds() {
     idsToShow.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-            element.style.display = ''; // Restore the default display style
+            element.style.display = 'inline'; // Restore the default display style
         }
     });
 }
