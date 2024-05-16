@@ -9,21 +9,26 @@ let lastClickedCard = ''
 let lastRecommendedCard = 'free-card';
 
 const additionalSupports = {
-  1000000: [
+  500000: [
     "Live Chat",
     "Group Onboarding",
+    "Weekly Product Training Sessions",
+  ],
+  1000000: [
+    "Live Chat",
+    "Implementation Specialist (1:1 Onboarding)",
     "Weekly Product Training Sessions",
   ],
   5000000: [
     "Live Chat",
     "Email Support from Customer Success Team",
-    "Group Onboarding",
+    "Implementation Specialist (1:1 Onboarding)",
     "Weekly Product Training Sessions",
   ],
   10000000: [
     "Live Chat",
     "Email & Phone Support from Dedicated Customer Success Manager",
-    "Group Onboarding",
+    "Implementation Specialist (1:1 Onboarding)",
     "Weekly Product Training Sessions",
   ],
   50000000: [
@@ -34,6 +39,7 @@ const additionalSupports = {
     "Weekly Product Training Sessions",
   ],
 };
+
 
 const revenue_levels = [
   49999999, 39999999, 29999999, 19999999, 14999999, 9999999, 7499999, 4999999,
@@ -450,13 +456,14 @@ const getSelectedTabPrice = () => {
 };
 
 const getAdditionalSupportText = (value) => {
-  const thresholds = [1000000, 5000000, 10000000, 50000000];
+  const thresholds = [500000, 1000000, 5000000, 10000000, 50000000];
   const defaultThreshold = 50000000;
 
   const selectedThreshold =
     thresholds.find((threshold) => value < threshold) || defaultThreshold;
   return additionalSupports[selectedThreshold];
 };
+
 
 const setAdditionalSupportText = (supports) => {
   const wrapperNodes = getElements("additional-support");
