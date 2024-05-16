@@ -601,7 +601,20 @@ const handleBodyClick = (e) => {
   closeDropdown();
 };
 
+const hideDurationAndCurrency = () => {
+  durationNodes.forEach((node) => (node.style.display = "none"));
+  currencyNodes.forEach((node) => (node.style.display = "none"));
+};
+
+const showDurationAndCurrency = () => {
+  durationNodes.forEach((node) => (node.style.display = "inline"));
+  currencyNodes.forEach((node) => (node.style.display = "inline"));
+};
+
+
 const initSliderAnimation = () => {
+  hideDurationAndCurrency(); // Hide elements by default
+
   getElement("pricing-dropdown-container").addEventListener("click", () => {
     if (!isOpen) {
       showDropdown();
@@ -615,23 +628,26 @@ const initSliderAnimation = () => {
     }
     isOpen = !isOpen;
   });
+
   /** add click listeners on each of the options */
   const allOptions = document.querySelectorAll(".pricing-dropdown-item");
   allOptions.forEach((option) => {
     option.addEventListener("click", () => {
-        lastClickedCard = ''
-        removeRecommendedBorderFromCards()
-        isOpen = true;
-        // change selected price text
-        const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
-        const range = option.getAttribute("fd-custom-range");
-        getElement("selected-price").innerText = `${option.innerText}`;
-        getElement("selected-price-wrapper").classList.remove("is-open");
-        // toggle the dropdown
-        handleSliderChange(priceVal);
-        setCardsPriceValue(range);
+      lastClickedCard = '';
+      removeRecommendedBorderFromCards();
+      isOpen = true;
+      // change selected price text
+      const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
+      const range = option.getAttribute("fd-custom-range");
+      getElement("selected-price").innerText = `${option.innerText}`;
+      getElement("selected-price-wrapper").classList.remove("is-open");
+      // toggle the dropdown
+      handleSliderChange(priceVal);
+      setCardsPriceValue(range);
 
-        getElement("pricing-dropdowns").style.display = "none";
+      showDurationAndCurrency(); // Show elements when a price is selected
+
+      getElement("pricing-dropdowns").style.display = "none";
     });
   });
 };
