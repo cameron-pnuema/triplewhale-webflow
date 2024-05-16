@@ -766,27 +766,24 @@ const handleScroll = () => {
 /**
  * Function Calls
  */
-// Function to set the Price element to "Pick your Plan" when nothing is selected in the dropdown
-function setDefaultPriceElements() {
+// 
+function hidePriceElements() {
     const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
     priceElements.forEach(element => {
-        element.innerText = 'Pick Your Plan'; // Set default text
+        element.style.display = 'none'; // Hide the price elements
     });
 }
 
-function updatePriceElements(growth, pro, enterprise) {
-    const growthPrices = document.querySelectorAll('[fd-custom-code="growth-price"]');
-    const proPrices = document.querySelectorAll('[fd-custom-code="pro-price"]');
-    const enterprisePrices = document.querySelectorAll('[fd-custom-code="enterprise-price"]');
-
-    growthPrices.forEach(node => node.innerText = growth);
-    proPrices.forEach(node => node.innerText = pro);
-    enterprisePrices.forEach(node => node.innerText = enterprise);
+function showPriceElements() {
+    const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
+    priceElements.forEach(element => {
+        element.style.display = ''; // Restore the default display style
+    });
 }
 
 //
 document.addEventListener('DOMContentLoaded', function() {
-    setDefaultPriceElements(); // Set default text on initial load
+    hidePriceElements(); // Hide prices on initial load
 });
 
 //
@@ -802,64 +799,12 @@ allOptions.forEach((option) => {
         getElement("selected-price").innerText = `${option.innerText}`;
         getElement("selected-price-wrapper").classList.remove("is-open");
         handleSliderChange(priceVal);
-        const { growth, pro, enterprise } = setCardsPriceValue(range);
-        updatePriceElements(growth, pro, enterprise);
+        setCardsPriceValue(range);
         getElement("pricing-dropdowns").style.display = "none";
-    });
-});
-
-// function to dynamically set mplementation Specialist (1:1 Onboarding) text
-function updateOnboardingText(priceVal) {
-    const onboardingElements = [
-        document.getElementById('implevsOnboarding'),
-        document.getElementById('implevsOnboarding2'),
-        document.getElementById('implevsOnboarding3')
-    ];
-
-    onboardingElements.forEach(element => {
-        if (!element) return; // Skip if the element is not found
-
-        if (priceVal <= 500000) {
-            element.innerText = "Group Onboarding";
-        } else if (priceVal > 500000) {
-            element.innerText = "Implementation Specialist";
-        }
-    });
-}
-
-//
-function setDefaultUIElements() {
-    hideElementsByIds(); // Hide elements function from earlier
-    setDefaultPriceText(); // Set default text for price elements
-    const defaultText = "Implementation Specialist (1:1 Onboarding)";
-    document.getElementById('implevsOnboarding').innerText = defaultText;
-    document.getElementById('implevsOnboarding2').innerText = defaultText;
-    document.getElementById('implevsOnboarding3').innerText = defaultText;
-}
-
-
-//
-const allOptions = document.querySelectorAll(".pricing-dropdown-item");
-allOptions.forEach((option) => {
-    option.addEventListener("click", () => {
-        lastClickedCard = '';
-        removeRecommendedBorderFromCards();
-        isOpen = true;
         
-        const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
-        const range = option.getAttribute("fd-custom-range");
-        getElement("selected-price").innerText = `${option.innerText}`;
-        getElement("selected-price-wrapper").classList.remove("is-open");
-        handleSliderChange(priceVal);
-        const { growth, pro, enterprise } = setCardsPriceValue(range);
-        updateUIElements(growth, pro, enterprise);
-        showElementsByIds(); // Show the elements with inline display
-        getElement("pricing-dropdowns").style.display = "none";
-
-        updateOnboardingText(priceVal); // Update the onboarding text for all relevant elements
+        showPriceElements(); // Show the price elements after a selection is made
     });
 });
-
 
 
 initSliderAnimation();
