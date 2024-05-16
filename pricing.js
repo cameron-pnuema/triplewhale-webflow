@@ -767,38 +767,26 @@ const handleScroll = () => {
  * Function Calls
  */
 // Function to set the Price element to "Pick your Plan" when nothing is selected in the dropdown
-function hideElementsByIds() {
-    const idsToHide = ['hideThis1', 'hideThis2', 'hideThis3', 'hideThis4', 'hideThis5', 'hideThis6'];
-    idsToHide.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.style.display = 'none'; // Hide the elements
-        }
-    });
-}
-
-function showElementsByIds() {
-    const idsToShow = ['hideThis1', 'hideThis2', 'hideThis3', 'hideThis4', 'hideThis5', 'hideThis6'];
-    idsToShow.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.style.display = 'block'; // Restore the default display style
-        }
-    });
-}
-
-function setDefaultPriceText() {
+function setDefaultPriceElements() {
     const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
     priceElements.forEach(element => {
         element.innerText = 'Pick Your Plan'; // Set default text
     });
 }
 
+function updatePriceElements(growth, pro, enterprise) {
+    const growthPrices = document.querySelectorAll('[fd-custom-code="growth-price"]');
+    const proPrices = document.querySelectorAll('[fd-custom-code="pro-price"]');
+    const enterprisePrices = document.querySelectorAll('[fd-custom-code="enterprise-price"]');
+
+    growthPrices.forEach(node => node.innerText = growth);
+    proPrices.forEach(node => node.innerText = pro);
+    enterprisePrices.forEach(node => node.innerText = enterprise);
+}
 
 //
 document.addEventListener('DOMContentLoaded', function() {
-    hideElementsByIds(); // Hide elements on initial load
-    setDefaultPriceText(); // Set default text for price elements
+    setDefaultPriceElements(); // Set default text on initial load
 });
 
 //
@@ -815,12 +803,10 @@ allOptions.forEach((option) => {
         getElement("selected-price-wrapper").classList.remove("is-open");
         handleSliderChange(priceVal);
         const { growth, pro, enterprise } = setCardsPriceValue(range);
-        updateUIElements(growth, pro, enterprise);
-        showElementsByIds(); // Show the previously hidden elements
+        updatePriceElements(growth, pro, enterprise);
         getElement("pricing-dropdowns").style.display = "none";
     });
 });
-
 
 initSliderAnimation();
 addListenerToCards();
