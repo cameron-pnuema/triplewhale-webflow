@@ -763,6 +763,49 @@ const handleScroll = () => {
   });
 };
 
+// functions to display "Pick your Plan" when nothing is selected
+function setDefaultPriceElements() {
+    const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
+    priceElements.forEach(element => {
+        element.innerText = 'Pick Your Plan'; // Set default text
+    });
+}
+
+function updatePriceElements(growth, pro, enterprise) {
+    const growthPrices = document.querySelectorAll('[fd-custom-code="growth-price"]');
+    const proPrices = document.querySelectorAll('[fd-custom-code="pro-price"]');
+    const enterprisePrices = document.querySelectorAll('[fd-custom-code="enterprise-price"]');
+
+    growthPrices.forEach(node => node.innerText = growth);
+    proPrices.forEach(node => node.innerText = pro);
+    enterprisePrices.forEach(node => node.innerText = enterprise);
+}
+
+//
+document.addEventListener('DOMContentLoaded', function() {
+    setDefaultPriceElements(); // Set default text on initial load
+});
+
+//
+const allOptions = document.querySelectorAll(".pricing-dropdown-item");
+allOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+        lastClickedCard = '';
+        removeRecommendedBorderFromCards();
+        isOpen = true;
+        
+        const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
+        const range = option.getAttribute("fd-custom-range");
+        getElement("selected-price").innerText = `${option.innerText}`;
+        getElement("selected-price-wrapper").classList.remove("is-open");
+        handleSliderChange(priceVal);
+        const { growth, pro, enterprise } = setCardsPriceValue(range);
+        updatePriceElements(growth, pro, enterprise);
+        getElement("pricing-dropdowns").style.display = "none";
+    });
+});
+
+
 /**
  * Function Calls
  */
