@@ -803,8 +803,6 @@ function updateUIElements(growth, pro, enterprise) {
     });
 }
 
-
-
 //
 document.addEventListener('DOMContentLoaded', function() {
     setDefaultUIElements(); // Set default UI state on initial load
