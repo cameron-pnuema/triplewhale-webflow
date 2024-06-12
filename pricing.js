@@ -40,7 +40,6 @@ const additionalSupports = {
   ],
 };
 
-
 const revenue_levels = [
   49999999, 39999999, 29999999, 19999999, 14999999, 9999999, 7499999, 4999999,
   2499999, 999999, 499999, 249999, 0,
@@ -611,6 +610,13 @@ const showDurationAndCurrency = () => {
   currencyNodes.forEach((node) => (node.style.display = "inline"));
 };
 
+// Function to toggle the visibility of the "dont-toggle" div
+function toggleDontToggleVisibility(isVisible) {
+    const dontToggleElement = document.getElementById('dont-toggle');
+    if (dontToggleElement) {
+        dontToggleElement.style.display = isVisible ? 'block' : 'none';
+    }
+}
 
 const initSliderAnimation = () => {
   hideDurationAndCurrency(); // Hide elements by default
@@ -651,8 +657,6 @@ const initSliderAnimation = () => {
     });
   });
 };
-
-
 
 const addListenerToCards = () => {
   const allCards = document.querySelectorAll("[fd-pricing-card]");
@@ -793,10 +797,7 @@ function setDefaultPriceElements() {
         element.innerText = 'Pick Your Plan'; // Set default text
     });
 
-    const dontToggleElement = document.getElementById('dont-toggle');
-    if (dontToggleElement) {
-        dontToggleElement.style.display = 'block'; // Hide the element
-    }
+    toggleDontToggleVisibility(true); // Make the div visible
 }
 
 
@@ -808,6 +809,8 @@ function updatePriceElements(growth, pro, enterprise) {
     growthPrices.forEach(node => node.innerText = growth);
     proPrices.forEach(node => node.innerText = pro);
     enterprisePrices.forEach(node => node.innerText = enterprise);
+
+    toggleDontToggleVisibility(false); // Hide the div when prices are updated
 }
 
 //
