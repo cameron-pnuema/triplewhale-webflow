@@ -795,7 +795,7 @@ function setDefaultPriceElements() {
 
     const dontToggleElement = document.getElementById('dont-toggle');
     if (dontToggleElement) {
-        dontToggleElement.style.display = 'none'; // Hide the element
+        dontToggleElement.style.display = 'block'; // Hide the element
     }
 }
 
