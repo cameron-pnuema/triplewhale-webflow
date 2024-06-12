@@ -792,7 +792,13 @@ function setDefaultPriceElements() {
     priceElements.forEach(element => {
         element.innerText = 'Pick Your Plan'; // Set default text
     });
+
+    const dontToggleElement = document.getElementById('dont-toggle');
+    if (dontToggleElement) {
+        dontToggleElement.style.display = 'none'; // Hide the element
+    }
 }
+
 
 function updatePriceElements(growth, pro, enterprise) {
     const growthPrices = document.querySelectorAll('[fd-custom-code="growth-price"]');
