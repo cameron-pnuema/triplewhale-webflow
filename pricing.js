@@ -654,6 +654,8 @@ const initSliderAnimation = () => {
       showDurationAndCurrency(); // Show elements when a price is selected
 
       getElement("pricing-dropdowns").style.display = "none";
+
+      toggleDontToggleVisibility(false); // Hide the div when a price is selected
     });
   });
 };
