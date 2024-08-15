@@ -701,7 +701,7 @@ const addToggleListener = () => {
     selectedDuration = selectedDuration === "yearly" ? "monthly" : "yearly";
 
     setCardsPriceValue();
-    updatePricingBasedOnValue(value);
+    
 
     // logic for setting total cost
     // const { selectedTabPrice, isEnterprise } = getSelectedTabPrice();
