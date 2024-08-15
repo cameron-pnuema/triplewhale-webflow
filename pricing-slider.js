@@ -5,15 +5,11 @@
 let selectedDuration = "yearly";
 let isAddonEnabled = true;
 let monthly_option = !0;
-let lastClickedCard = ''
-let lastRecommendedCard = 'free-card';
+let lastClickedCard = "";
+let lastRecommendedCard = "free-card";
 
 const additionalSupports = {
-  500000: [
-    "Live Chat",
-    "Group Onboarding",
-    "Weekly Product Training Sessions",
-  ],
+  500000: ["Live Chat", "Group Onboarding", "Weekly Product Training Sessions"],
   1000000: [
     "Live Chat",
     "Implementation Specialist (1:1 Onboarding)",
@@ -256,9 +252,9 @@ const getYearlyPrices = (range) => {
  * Global Helper Functions
  */
 const getElement = (value) =>
-  document.querySelector([fd-custom-code="${value}"]);
+  document.querySelector(`[fd-custom-code="${value}"]`);
 const getElements = (value) =>
-  document.querySelectorAll([fd-custom-code="${value}"]);
+  document.querySelectorAll(`[fd-custom-code="${value}"]`);
 
 const addCommas = (num) => new Intl.NumberFormat("en-us").format(num);
 
@@ -317,7 +313,6 @@ const proCard = getElement("pro-card");
 const enterpriseCard = getElement("enterprise-card");
 
 const hideAllCards = () => {
- 
   [freeCard, growthCard, proCard, enterpriseCard].forEach(decreaseCardSize);
   hideEnterpriseForm();
 };
@@ -327,21 +322,19 @@ const showAllCards = () => {
 };
 
 const removeRecommendedClassFromCards = () => {
-
   [freeCard, growthCard, proCard, enterpriseCard].forEach((card) => {
     card.classList.remove("recommended-card");
   });
 };
 
-const removeRecommendedBorderFromCards = () =>
-{
-    [freeCard, growthCard, proCard, enterpriseCard].forEach((card) => {
-      card.classList.remove('recommended-border')
-    });
-}
+const removeRecommendedBorderFromCards = () => {
+  [freeCard, growthCard, proCard, enterpriseCard].forEach((card) => {
+    card.classList.remove("recommended-border");
+  });
+};
 
 const addRecommendedClass = (el) => el.classList.add("recommended-card");
-const addRecommendedBorder = (el) => el.classList.add('recommended-border')
+const addRecommendedBorder = (el) => el.classList.add("recommended-border");
 
 /**
  * Logic to set card prices
@@ -366,7 +359,7 @@ const setPrice = (node, price) => {
 };
 
 const setAddonCost = (creative_cockpit) => {
-  getElement("addon-cost").innerText = $${creative_cockpit};
+  getElement("addon-cost").innerText = `$${creative_cockpit}`;
 };
 const setPricesToCustom = () => {
   growthPriceNodes.forEach((node) => setPrice(node, "Custom"));
@@ -384,7 +377,7 @@ const setYearlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  durationNodes.forEach((node) => (node.innerText = ${duration}));
+  durationNodes.forEach((node) => (node.innerText = `${duration}`));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
@@ -400,7 +393,7 @@ const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  durationNodes.forEach((node) => (node.innerText = ${duration}));
+  durationNodes.forEach((node) => (node.innerText = `${duration}`));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
@@ -432,17 +425,17 @@ const setTotalCost = (price, isEnterprise) => {
   }
 
   const totalCostNode = document.getElementById("tw-total-cost");
-  totalCostNode.innerText = $${totalCost};
+  totalCostNode.innerText = `$${totalCost}`;
 };
 
 const getSelectedTabPrice = () => {
   const allPriceTabs = document.querySelectorAll("[fd-card-tab]");
   const selectedTab = [...allPriceTabs].find((el) =>
-    el.classList.contains("w--current"),
+    el.classList.contains("w--current")
   );
   //check if selected tab is enterprise
   const isEnterprise = selectedTab.querySelector(
-    "[fd-custom-code='enterprise-price']",
+    "[fd-custom-code='enterprise-price']"
   );
   const selectedTabPrice = selectedTab
     .querySelector("[price]")
@@ -463,7 +456,6 @@ const getAdditionalSupportText = (value) => {
   return additionalSupports[selectedThreshold];
 };
 
-
 const setAdditionalSupportText = (supports) => {
   const wrapperNodes = getElements("additional-support");
   wrapperNodes.forEach((node) => {
@@ -471,11 +463,11 @@ const setAdditionalSupportText = (supports) => {
     supports.forEach((support) => {
       let div = document.createElement("div");
       div.classList.add("card-list-flex");
-      div.innerHTML = 
+      div.innerHTML = `
       <img src="https://assets-global.website-files.com/61bcbae3ae2e8ee49aa790b0/651ad7899a658b656c548cd9_647606ad31337d3beb5e2cc5_check-icon-brix-templates.svg.svg"
       loading="lazy" alt=""  class="tick-icon">
       <div>${support}</div>
-      ;
+      `;
       node.appendChild(div);
     });
   });
@@ -517,8 +509,8 @@ const handleSliderChange = (value) => {
     showCard(getElement("pro-card"));
     //show the form of the enterprise card
     addRecommendedClass(getElement("enterprise-card"));
-    addRecommendedBorder(getElement("enterprise-card"))
-    lastRecommendedCard = 'enterprise-card'
+    addRecommendedBorder(getElement("enterprise-card"));
+    lastRecommendedCard = "enterprise-card";
     showEnterpriseForm();
   } else {
     /** Change CTA of growth card */
@@ -541,22 +533,22 @@ const handleSliderChange = (value) => {
       // add recommended to pro card and show pro and enterprise card
       showEnterpriseForm();
       addRecommendedClass(getElement("pro-card"));
-      addRecommendedBorder(getElement('pro-card'))
-      lastRecommendedCard = 'pro-card'
+      addRecommendedBorder(getElement("pro-card"));
+      lastRecommendedCard = "pro-card";
       showCard(getElement("pro-card"));
       showCard(getElement("enterprise-card"));
     } else if (value >= 500000 && value < 1000000) {
       // add recommended to growth card & Show growth and pro card
       addRecommendedClass(getElement("growth-card"));
-      addRecommendedBorder(getElement('growth-card'))
-      lastRecommendedCard = 'growth-card'
+      addRecommendedBorder(getElement("growth-card"));
+      lastRecommendedCard = "growth-card";
       showCard(getElement("growth-card"));
       showCard(getElement("pro-card"));
     } else if (value < 500000) {
       // add recommended to free card & show free and growth card
       addRecommendedClass(getElement("free-card"));
-      addRecommendedBorder(getElement('free-card'))
-      lastRecommendedCard = 'free-card'
+      addRecommendedBorder(getElement("free-card"));
+      lastRecommendedCard = "free-card";
       showCard(getElement("free-card"));
       showCard(getElement("growth-card"));
     }
@@ -612,10 +604,10 @@ const showDurationAndCurrency = () => {
 
 // Function to toggle the visibility of the "dont-toggle" div
 function toggleDontToggleVisibility(isVisible) {
-    const dontToggleElement = document.getElementById('dont-toggle');
-    if (dontToggleElement) {
-        dontToggleElement.style.display = isVisible ? 'block' : 'none';
-    }
+  const dontToggleElement = document.getElementById("dont-toggle");
+  if (dontToggleElement) {
+    dontToggleElement.style.display = isVisible ? "block" : "none";
+  }
 }
 
 const initSliderAnimation = () => {
@@ -639,13 +631,13 @@ const initSliderAnimation = () => {
   const allOptions = document.querySelectorAll(".pricing-dropdown-item");
   allOptions.forEach((option) => {
     option.addEventListener("click", () => {
-      lastClickedCard = '';
+      lastClickedCard = "";
       removeRecommendedBorderFromCards();
       isOpen = true;
       // change selected price text
       const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
       const range = option.getAttribute("fd-custom-range");
-      getElement("selected-price").innerText = ${option.innerText};
+      getElement("selected-price").innerText = `${option.innerText}`;
       getElement("selected-price-wrapper").classList.remove("is-open");
       // toggle the dropdown
       handleSliderChange(priceVal);
@@ -664,40 +656,40 @@ const addListenerToCards = () => {
   const allCards = document.querySelectorAll("[fd-pricing-card]");
   allCards.forEach((card) => {
     card.addEventListener("click", () => {
-        const selectedCard = card.getAttribute("fd-custom-code");
-        
-        if (selectedCard === lastClickedCard) return
-        removeRecommendedClassFromCards()
-        removeRecommendedBorderFromCards()
-        addRecommendedBorder(card)
-        // fire click listener only if it is hidden
-        if (card.classList.contains("hide-card")) {
-            // show enterprise form if the selcted card is enteprise
-            hideAllCards();
+      const selectedCard = card.getAttribute("fd-custom-code");
 
-            if (selectedCard === "enterprise-card" || selectedCard === "pro-card") {
-                showCard(getElement("pro-card"));
-                showCard(getElement("enterprise-card"));
-                showEnterpriseForm();
-            } else {
-                hideEnterpriseForm();
-            if (selectedCard === "free-card")
-                showCards(["free-card", "growth-card"]);
-            if (selectedCard === "growth-card")
-                showCards(["growth-card", "pro-card"]);
-            }
-        }
-        if (selectedCard === lastRecommendedCard) {
-            addRecommendedClass(getElement(selectedCard))
-        }
-        lastClickedCard = selectedCard;
+      if (selectedCard === lastClickedCard) return;
+      removeRecommendedClassFromCards();
+      removeRecommendedBorderFromCards();
+      addRecommendedBorder(card);
+      // fire click listener only if it is hidden
+      if (card.classList.contains("hide-card")) {
+        // show enterprise form if the selcted card is enteprise
+        hideAllCards();
 
-        allCards.forEach((item) => {
-            const cardIconWrap = item.querySelector(".card-icon-wrap");
-            if (cardIconWrap.classList.contains("vertical")) {
-                cardIconWrap.style.top = 0px;
-            }
-        });
+        if (selectedCard === "enterprise-card" || selectedCard === "pro-card") {
+          showCard(getElement("pro-card"));
+          showCard(getElement("enterprise-card"));
+          showEnterpriseForm();
+        } else {
+          hideEnterpriseForm();
+          if (selectedCard === "free-card")
+            showCards(["free-card", "growth-card"]);
+          if (selectedCard === "growth-card")
+            showCards(["growth-card", "pro-card"]);
+        }
+      }
+      if (selectedCard === lastRecommendedCard) {
+        addRecommendedClass(getElement(selectedCard));
+      }
+      lastClickedCard = selectedCard;
+
+      allCards.forEach((item) => {
+        const cardIconWrap = item.querySelector(".card-icon-wrap");
+        if (cardIconWrap.classList.contains("vertical")) {
+          cardIconWrap.style.top = `0px`;
+        }
+      });
     });
   });
 };
@@ -740,14 +732,14 @@ const addAddonClickListener = () => {
 
 const addTabClickListener = () => {
   const tabs = document.querySelectorAll(
-    ".price-box-tall.w-inline-block.w-tab-link",
+    ".price-box-tall.w-inline-block.w-tab-link"
   );
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const price = tab.querySelector("[price]").getAttribute("price");
       //check if tab is enterprise
       const isEnterprise = tab.querySelector(
-        "[fd-custom-code='enterprise-price']",
+        "[fd-custom-code='enterprise-price']"
       );
 
       //   setTotalCost(price, isEnterprise);
@@ -767,7 +759,7 @@ const handleScroll = () => {
     const navHeight = navBar.clientHeight;
 
     const cardPaddingTop = window.getComputedStyle(
-      card.querySelector(".card-content-wrap"),
+      card.querySelector(".card-content-wrap")
     ).paddingTop;
 
     const cardPaddingTopValue = Number(cardPaddingTop.replace("px", ""));
@@ -781,64 +773,68 @@ const handleScroll = () => {
 
     const windowWidth = window.innerWidth;
     if (windowWidth < 992) {
-      cardIconWrap.style.top = ${navHeight}px;
+      cardIconWrap.style.top = `${navHeight}px`;
       return;
     }
     if (cardIconWrap.classList.contains("vertical")) {
-      cardIconWrap.style.top = 0px;
+      cardIconWrap.style.top = `0px`;
     } else {
-      cardIconWrap.style.top = ${navHeight}px;
+      cardIconWrap.style.top = `${navHeight}px`;
     }
   });
 };
 
 // functions to display "Pick your Plan" when nothing is selected
 function setDefaultPriceElements() {
-    const priceElements = document.querySelectorAll('[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]');
-    priceElements.forEach(element => {
-        element.innerText = 'Pick Your Plan'; // Set default text
-    });
+  const priceElements = document.querySelectorAll(
+    '[fd-custom-code="growth-price"], [fd-custom-code="pro-price"], [fd-custom-code="enterprise-price"]'
+  );
+  priceElements.forEach((element) => {
+    element.innerText = "Pick Your Plan"; // Set default text
+  });
 
-    toggleDontToggleVisibility(true); // Make the div visible
+  toggleDontToggleVisibility(true); // Make the div visible
 }
 
-
 function updatePriceElements(growth, pro, enterprise) {
-    const growthPrices = document.querySelectorAll('[fd-custom-code="growth-price"]');
-    const proPrices = document.querySelectorAll('[fd-custom-code="pro-price"]');
-    const enterprisePrices = document.querySelectorAll('[fd-custom-code="enterprise-price"]');
+  const growthPrices = document.querySelectorAll(
+    '[fd-custom-code="growth-price"]'
+  );
+  const proPrices = document.querySelectorAll('[fd-custom-code="pro-price"]');
+  const enterprisePrices = document.querySelectorAll(
+    '[fd-custom-code="enterprise-price"]'
+  );
 
-    growthPrices.forEach(node => node.innerText = growth);
-    proPrices.forEach(node => node.innerText = pro);
-    enterprisePrices.forEach(node => node.innerText = enterprise);
+  growthPrices.forEach((node) => (node.innerText = growth));
+  proPrices.forEach((node) => (node.innerText = pro));
+  enterprisePrices.forEach((node) => (node.innerText = enterprise));
 
-    toggleDontToggleVisibility(false); // Hide the div when prices are updated
+  toggleDontToggleVisibility(false); // Hide the div when prices are updated
 }
 
 //
-document.addEventListener('DOMContentLoaded', function() {
-    setDefaultPriceElements(); // Set default text on initial load
+document.addEventListener("DOMContentLoaded", function () {
+  setDefaultPriceElements(); // Set default text on initial load
 });
 
 //
 const allOptions = document.querySelectorAll(".pricing-dropdown-item");
 allOptions.forEach((option) => {
-    option.addEventListener("click", () => {
-        lastClickedCard = '';
-        removeRecommendedBorderFromCards();
-        isOpen = true;
-        
-        const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
-        const range = option.getAttribute("fd-custom-range");
-        getElement("selected-price").innerText = ${option.innerText};
-        getElement("selected-price-wrapper").classList.remove("is-open");
-        handleSliderChange(priceVal);
-        const { growth, pro, enterprise } = setCardsPriceValue(range);
-        updatePriceElements(growth, pro, enterprise);
-        getElement("pricing-dropdowns").style.display = "none";
-    });
-});
+  option.addEventListener("click", () => {
+    lastClickedCard = "";
+    removeRecommendedBorderFromCards();
+    isOpen = true;
 
+    const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
+    const range = option.getAttribute("fd-custom-range");
+    getElement("selected-price").innerText = `${option.innerText}`;
+    getElement("selected-price-wrapper").classList.remove("is-open");
+    handleSliderChange(priceVal);
+    const { growth, pro, enterprise } = setCardsPriceValue(range);
+    updatePriceElements(growth, pro, enterprise);
+    getElement("pricing-dropdowns").style.display = "none";
+  });
+});
 
 /**
  * Function Calls
@@ -854,77 +850,3 @@ setCardsPriceValue(currentRange);
 addAddonClickListener();
 
 addTabClickListener();
-
-
-// Format the number for display purposes
-function formatNumber(number) {
-    if (number < 1000000) {
-        return Math.round(number / 1000) + 'k';
-    } else if (number < 10000000) {
-        return (Math.round(number / 100000) / 10).toFixed(1) + 'M';
-    } else {
-        return Math.round(number / 1000000) + 'M';
-    }
-}
-
-// Function to determine the revenue range based on the value
-const determineRevenueRange = (value) => {
-    if (value >= 50000000) return "50M+";
-    if (value >= 40000000) return "40-50M";
-    if (value >= 30000000) return "30-40M";
-    if (value >= 20000000) return "20-30M";
-    if (value >= 15000000) return "15-20M";
-    if (value >= 10000000) return "10-15M";
-    if (value >= 7500000) return "7.5-10M";
-    if (value >= 5000000) return "5-7.5M";
-    if (value >= 2500000) return "2.5-5M";
-    if (value >= 1000000) return "1-2.5M";
-    if (value >= 500000) return "500-1M";
-    if (value >= 250000) return "250-500K";
-    return "0-250K";
-};
-
-// Function to update the pricing based on the value
-const updatePricingBasedOnValue = (value) => {
-    const range = determineRevenueRange(value);
-    setCardsPriceValue(range);
-    
-    // Determine what plan should be recommended
-    handleSliderChange(value);
-};
-
-// Function to handle both formatting and pricing updates
-function updateCopyDigits() {
-    const displayValue = document.getElementById('fs-display-value');
-    if (!displayValue) return;
-
-    const value = parseInt(displayValue.textContent.replace(/,/g, ''), 10);
-    if (isNaN(value)) return;
-
-    const formattedValue = formatNumber(value);
-
-    // Update elements with the formatted value
-    const copyDigitsElements = document.querySelectorAll('[copy-digits="value"]');
-    copyDigitsElements.forEach(element => {
-        element.textContent = formattedValue;
-    });
-
-    // Trigger the pricing update
-    updatePricingBasedOnValue(value);
-}
-
-// Run the function initially
-updateCopyDigits();
-
-// Set up a MutationObserver to watch for changes in the fs-display-value element
-const targetNode = document.getElementById('fs-display-value');
-if (targetNode) {
-    const observer = new MutationObserver(updateCopyDigits);
-    observer.observe(targetNode, { childList: true, characterData: true, subtree: true });
-}
-
-// Optional: Trigger initial check if the value is already set
-const initialValue = parseInt(targetNode.textContent.replace(/,/g, ''), 10);
-if (!isNaN(initialValue)) {
-    updatePricingBasedOnValue(initialValue);
-} 
