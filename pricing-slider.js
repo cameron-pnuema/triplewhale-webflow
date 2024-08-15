@@ -917,13 +917,6 @@ const triggerInitialCheck = () => {
 observeDisplayValueChanges();
 triggerInitialCheck();
 
-// Example of updating the value directly
-document.getElementById('fs-display-value').innerText = "4500000";
 
-// Manually trigger the update
-const newValue = parseInt(document.getElementById('fs-display-value').innerText.replace(/[^0-9]/g, ''), 10);
-if (!isNaN(newValue)) {
-  updatePricingBasedOnValue(newValue);
-}
 
 
