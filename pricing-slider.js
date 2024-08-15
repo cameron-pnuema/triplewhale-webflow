@@ -820,10 +820,18 @@ document.addEventListener('DOMContentLoaded', function() {
     setDefaultPriceElements(); // Set default text on initial load
 });
 
-// NEW update pricing UI
+// Function to get element by custom code
+function getElement(value) {
+  return document.querySelector(`[fd-custom-code="${value}"]`);
+}
+
+// Function to update pricing UI
 function updatePricingUI(selectedOption) {
+  console.log("Updating pricing UI for option:", selectedOption);
   const priceVal = Number(selectedOption.getAttribute("fd-pricing-value")) - 1;
   const range = selectedOption.getAttribute("fd-custom-range");
+
+  console.log("Price value:", priceVal, "Range:", range);
 
   // Reset and update UI
   lastClickedCard = '';
@@ -843,11 +851,14 @@ function updatePricingUI(selectedOption) {
   getElement("pricing-dropdowns").style.display = "none";
   showDurationAndCurrency();
   toggleDontToggleVisibility(false);
+
+  console.log("Pricing UI update complete");
 }
 
 // Function to map input value to revenue range
 function mapValueToRevenueRange(value) {
   const numValue = Number(value);
+  console.log("Mapping value:", numValue);
   if (numValue < 250000) return "0-250K";
   if (numValue < 500000) return "250-500K";
   if (numValue < 1000000) return "500-1M";
@@ -861,50 +872,6 @@ function mapValueToRevenueRange(value) {
   if (numValue < 40000000) return "30-40M";
   if (numValue < 50000000) return "40-50M";
   return "50M+";
-}
-
-// Function to update pricing based on input value
-function updatePricingFromInputValue(value) {
-  const range = mapValueToRevenueRange(value);
-  const selectedOption = document.querySelector(`.pricing-dropdown-item[fd-custom-range='${range}']`);
-  
-  if (selectedOption) {
-    updatePricingUI(selectedOption);
-  } else {
-    console.error(`No option found for range: ${range}`);
-  }
-}
-
-// Set up MutationObserver to watch for changes
-const targetNode = document.getElementById('fs-display-value');
-const observerOptions = {
-  characterData: true,
-  childList: true,
-  subtree: true
-};
-
-const observer = new MutationObserver((mutationsList, observer) => {
-  for (let mutation of mutationsList) {
-    if (mutation.type === 'characterData' || mutation.type === 'childList') {
-      const newValue = targetNode.textContent;
-      updatePricingFromInputValue(newValue);
-      break;
-    }
-  }
-});
-
-// Start observing the target node for configured mutations
-observer.observe(targetNode, observerOptions);
-
-// Initial update
-updatePricingFromInputValue(targetNode.textContent);
-
-//checking for errors
-// Function to map input value to revenue range
-function mapValueToRevenueRange(value) {
-  const numValue = Number(value);
-  console.log("Mapping value:", numValue);
-  // ... rest of the function remains the same ...
 }
 
 // Function to update pricing based on input value
@@ -957,6 +924,10 @@ if (targetNode) {
   console.log("Performing initial update");
   updatePricingFromInputValue(targetNode.textContent);
 }
+
+// Note: This code assumes that functions like removeRecommendedBorderFromCards(),
+// handleSliderChange(), setCardsPriceValue(), showDurationAndCurrency(), and
+// toggleDontToggleVisibility() are defined elsewhere in your codebase.
 
 
 //
