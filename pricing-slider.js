@@ -256,9 +256,9 @@ const getYearlyPrices = (range) => {
  * Global Helper Functions
  */
 const getElement = (value) =>
-  document.querySelector(`[fd-custom-code="${value}"]`);
+  document.querySelector([fd-custom-code="${value}"]);
 const getElements = (value) =>
-  document.querySelectorAll(`[fd-custom-code="${value}"]`);
+  document.querySelectorAll([fd-custom-code="${value}"]);
 
 const addCommas = (num) => new Intl.NumberFormat("en-us").format(num);
 
@@ -366,7 +366,7 @@ const setPrice = (node, price) => {
 };
 
 const setAddonCost = (creative_cockpit) => {
-  getElement("addon-cost").innerText = `$${creative_cockpit}`;
+  getElement("addon-cost").innerText = $${creative_cockpit};
 };
 const setPricesToCustom = () => {
   growthPriceNodes.forEach((node) => setPrice(node, "Custom"));
@@ -384,7 +384,7 @@ const setYearlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  durationNodes.forEach((node) => (node.innerText = `${duration}`));
+  durationNodes.forEach((node) => (node.innerText = ${duration}));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
@@ -400,7 +400,7 @@ const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  durationNodes.forEach((node) => (node.innerText = `${duration}`));
+  durationNodes.forEach((node) => (node.innerText = ${duration}));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
@@ -432,7 +432,7 @@ const setTotalCost = (price, isEnterprise) => {
   }
 
   const totalCostNode = document.getElementById("tw-total-cost");
-  totalCostNode.innerText = `$${totalCost}`;
+  totalCostNode.innerText = $${totalCost};
 };
 
 const getSelectedTabPrice = () => {
@@ -471,11 +471,11 @@ const setAdditionalSupportText = (supports) => {
     supports.forEach((support) => {
       let div = document.createElement("div");
       div.classList.add("card-list-flex");
-      div.innerHTML = `
+      div.innerHTML = 
       <img src="https://assets-global.website-files.com/61bcbae3ae2e8ee49aa790b0/651ad7899a658b656c548cd9_647606ad31337d3beb5e2cc5_check-icon-brix-templates.svg.svg"
       loading="lazy" alt=""  class="tick-icon">
       <div>${support}</div>
-      `;
+      ;
       node.appendChild(div);
     });
   });
@@ -645,7 +645,7 @@ const initSliderAnimation = () => {
       // change selected price text
       const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
       const range = option.getAttribute("fd-custom-range");
-      getElement("selected-price").innerText = `${option.innerText}`;
+      getElement("selected-price").innerText = ${option.innerText};
       getElement("selected-price-wrapper").classList.remove("is-open");
       // toggle the dropdown
       handleSliderChange(priceVal);
@@ -695,7 +695,7 @@ const addListenerToCards = () => {
         allCards.forEach((item) => {
             const cardIconWrap = item.querySelector(".card-icon-wrap");
             if (cardIconWrap.classList.contains("vertical")) {
-                cardIconWrap.style.top = `0px`;
+                cardIconWrap.style.top = 0px;
             }
         });
     });
@@ -781,13 +781,13 @@ const handleScroll = () => {
 
     const windowWidth = window.innerWidth;
     if (windowWidth < 992) {
-      cardIconWrap.style.top = `${navHeight}px`;
+      cardIconWrap.style.top = ${navHeight}px;
       return;
     }
     if (cardIconWrap.classList.contains("vertical")) {
-      cardIconWrap.style.top = `0px`;
+      cardIconWrap.style.top = 0px;
     } else {
-      cardIconWrap.style.top = `${navHeight}px`;
+      cardIconWrap.style.top = ${navHeight}px;
     }
   });
 };
@@ -830,7 +830,7 @@ allOptions.forEach((option) => {
         
         const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
         const range = option.getAttribute("fd-custom-range");
-        getElement("selected-price").innerText = `${option.innerText}`;
+        getElement("selected-price").innerText = ${option.innerText};
         getElement("selected-price-wrapper").classList.remove("is-open");
         handleSliderChange(priceVal);
         const { growth, pro, enterprise } = setCardsPriceValue(range);
@@ -856,5 +856,75 @@ addAddonClickListener();
 addTabClickListener();
 
 
+// Format the number for display purposes
+function formatNumber(number) {
+    if (number < 1000000) {
+        return Math.round(number / 1000) + 'k';
+    } else if (number < 10000000) {
+        return (Math.round(number / 100000) / 10).toFixed(1) + 'M';
+    } else {
+        return Math.round(number / 1000000) + 'M';
+    }
+}
 
+// Function to determine the revenue range based on the value
+const determineRevenueRange = (value) => {
+    if (value >= 50000000) return "50M+";
+    if (value >= 40000000) return "40-50M";
+    if (value >= 30000000) return "30-40M";
+    if (value >= 20000000) return "20-30M";
+    if (value >= 15000000) return "15-20M";
+    if (value >= 10000000) return "10-15M";
+    if (value >= 7500000) return "7.5-10M";
+    if (value >= 5000000) return "5-7.5M";
+    if (value >= 2500000) return "2.5-5M";
+    if (value >= 1000000) return "1-2.5M";
+    if (value >= 500000) return "500-1M";
+    if (value >= 250000) return "250-500K";
+    return "0-250K";
+};
 
+// Function to update the pricing based on the value
+const updatePricingBasedOnValue = (value) => {
+    const range = determineRevenueRange(value);
+    setCardsPriceValue(range);
+    
+    // Determine what plan should be recommended
+    handleSliderChange(value);
+};
+
+// Function to handle both formatting and pricing updates
+function updateCopyDigits() {
+    const displayValue = document.getElementById('fs-display-value');
+    if (!displayValue) return;
+
+    const value = parseInt(displayValue.textContent.replace(/,/g, ''), 10);
+    if (isNaN(value)) return;
+
+    const formattedValue = formatNumber(value);
+
+    // Update elements with the formatted value
+    const copyDigitsElements = document.querySelectorAll('[copy-digits="value"]');
+    copyDigitsElements.forEach(element => {
+        element.textContent = formattedValue;
+    });
+
+    // Trigger the pricing update
+    updatePricingBasedOnValue(value);
+}
+
+// Run the function initially
+updateCopyDigits();
+
+// Set up a MutationObserver to watch for changes in the fs-display-value element
+const targetNode = document.getElementById('fs-display-value');
+if (targetNode) {
+    const observer = new MutationObserver(updateCopyDigits);
+    observer.observe(targetNode, { childList: true, characterData: true, subtree: true });
+}
+
+// Optional: Trigger initial check if the value is already set
+const initialValue = parseInt(targetNode.textContent.replace(/,/g, ''), 10);
+if (!isNaN(initialValue)) {
+    updatePricingBasedOnValue(initialValue);
+} 
