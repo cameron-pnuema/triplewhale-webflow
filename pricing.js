@@ -923,4 +923,3 @@ const initialValue = parseInt(targetNode.textContent.replace(/,/g, ''), 10);
 if (!isNaN(initialValue)) {
     updatePricingBasedOnValue(initialValue);
 }
-
