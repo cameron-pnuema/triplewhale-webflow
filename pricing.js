@@ -861,35 +861,32 @@ const determineRevenueRange = (value) => {
     return "0-250K";
 };
 
-// Function to get the price based on the range and plan type
-const getPriceForPlan = (range, plan) => {
-    if (selectedDuration === "monthly") {
-        return prices[range].monthly[plan];
-    } else {
-        return prices[range].yearly[plan];
-    }
-};
-
-// Function to determine and update the recommended plan and price
-const updateRecommendedDetails = (value) => {
-    let recommendedPlan = "";
-    let recommendedPrice = "";
-
-    if (value >= 5000000) {
-        recommendedPlan = "enterprise";
-    } else if (value >= 1000000 && value < 5000000) {
-        recommendedPlan = "pro";
-    } else if (value >= 500000 && value < 1000000) {
-        recommendedPlan = "growth";
-    } else {
-        recommendedPlan = "free";  // Assuming free is the fallback, though your logic doesn't define it.
-    }
-
-    // Determine the corresponding revenue range
+// Function to determine the recommended plan and price
+const determineRecommendedPlanAndPrice = (value) => {
+    let recommendedPlan = '';
+    let recommendedPrice = '';
     const range = determineRevenueRange(value);
 
-    // Get the price for the recommended plan
-    recommendedPrice = getPriceForPlan(range, recommendedPlan);
+    if (value >= 1000000 && value < 5000000) {
+        // Recommended plan is Pro
+        recommendedPlan = 'pro';
+        recommendedPrice = prices[range].monthly.pro;
+    } else if (value >= 5000000) {
+        // Recommended plan is Enterprise
+        recommendedPlan = 'enterprise';
+        recommendedPrice = prices[range].monthly.enterprise;
+    } else if (value >= 500000 && value < 1000000) {
+        // Recommended plan is Growth
+        recommendedPlan = 'growth';
+        recommendedPrice = prices[range].monthly.growth;
+    }
+
+    return { recommendedPlan, recommendedPrice };
+};
+
+// Function to update the recommended price and plan details
+const updateRecommendedDetails = (value) => {
+    const { recommendedPlan, recommendedPrice } = determineRecommendedPlanAndPrice(value);
 
     // Update elements with the recommended price
     const recommendedPriceElements = document.querySelectorAll('[recommended-price="digits"]');
@@ -913,10 +910,12 @@ const updateRecommendedDetails = (value) => {
 const updatePricingBasedOnValue = (value) => {
     const range = determineRevenueRange(value);
     setCardsPriceValue(range);
-    
-    // Determine what plan should be recommended and update the recommended details
-    handleSliderChange(value);
+
+    // Determine and update recommended plan and price
     updateRecommendedDetails(value);
+
+    // Determine what plan should be recommended
+    handleSliderChange(value);
 
     // Show the duration and currency elements
     showDurationAndCurrency();
