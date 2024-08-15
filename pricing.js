@@ -856,17 +856,6 @@ addAddonClickListener();
 addTabClickListener();
 
 
-// Format the number for display purposes
-function formatNumber(number) {
-    if (number < 1000000) {
-        return Math.round(number / 1000) + 'k';
-    } else if (number < 10000000) {
-        return (Math.round(number / 100000) / 10).toFixed(1) + 'M';
-    } else {
-        return Math.round(number / 1000000) + 'M';
-    }
-}
-
 // Function to determine the revenue range based on the value
 const determineRevenueRange = (value) => {
     if (value >= 50000000) return "50M+";
@@ -891,6 +880,12 @@ const updatePricingBasedOnValue = (value) => {
     
     // Determine what plan should be recommended
     handleSliderChange(value);
+
+    // Show the duration and currency elements
+    showDurationAndCurrency();
+    
+    // Update the recommended price and plan name
+    updateRecommendedDetails();
 };
 
 // Function to handle both formatting and pricing updates
@@ -913,6 +908,32 @@ function updateCopyDigits() {
     updatePricingBasedOnValue(value);
 }
 
+// Function to update recommended price and plan details
+const updateRecommendedDetails = () => {
+    const recommendedCard = document.querySelector('.recommended-card');
+    if (!recommendedCard) return;
+
+    const recommendedPrice = recommendedCard.querySelector('[price]').getAttribute('price');
+    const recommendedPlan = recommendedCard.getAttribute('fd-custom-code').replace('-card', '');
+
+    // Update elements with the recommended price
+    const recommendedPriceElements = document.querySelectorAll('[recommended-price="digits"]');
+    recommendedPriceElements.forEach(element => {
+        element.textContent = recommendedPrice === "Custom" ? "Custom" : addCommas(recommendedPrice);
+    });
+
+    // Update elements with the recommended plan name
+    const recommendedPlanElements = document.querySelectorAll('[recommended-plan="name"]');
+    recommendedPlanElements.forEach(element => {
+        element.textContent = recommendedPlan.charAt(0).toUpperCase() + recommendedPlan.slice(1);
+    });
+
+    // Show/Hide custom buttons based on the price
+    const isCustom = recommendedPrice === "Custom";
+    document.getElementById('is-custom-button').style.display = isCustom ? 'block' : 'none';
+    document.getElementById('not-custom-button').style.display = isCustom ? 'none' : 'block';
+}
+
 // Run the function initially
 updateCopyDigits();
 
@@ -929,4 +950,5 @@ if (!isNaN(initialValue)) {
     updatePricingBasedOnValue(initialValue);
 }
 
+// Existing functions and event listeners here
 
