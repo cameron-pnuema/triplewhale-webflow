@@ -854,3 +854,58 @@ setCardsPriceValue(currentRange);
 addAddonClickListener();
 
 addTabClickListener();
+
+
+// Function to determine the revenue range based on the value
+const determineRevenueRange = (value) => {
+  if (value >= 50000000) return "50M+";
+  if (value >= 40000000) return "40-50M";
+  if (value >= 30000000) return "30-40M";
+  if (value >= 20000000) return "20-30M";
+  if (value >= 15000000) return "15-20M";
+  if (value >= 10000000) return "10-15M";
+  if (value >= 7500000) return "7.5-10M";
+  if (value >= 5000000) return "5-7.5M";
+  if (value >= 2500000) return "2.5-5M";
+  if (value >= 1000000) return "1-2.5M";
+  if (value >= 500000) return "500-1M";
+  if (value >= 250000) return "250-500K";
+  return "0-250K";
+};
+
+// Function to handle the pricing update based on the value
+const updatePricingBasedOnValue = (value) => {
+  const range = determineRevenueRange(value);
+  setCardsPriceValue(range);
+  
+  // Determine what plan should be recommended
+  handleSliderChange(value);
+};
+
+// Observe changes in the fs-display-value element
+const targetNode = document.getElementById('fs-display-value');
+
+const config = { characterData: true, subtree: true, childList: true };
+
+const callback = (mutationsList) => {
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'childList' || mutation.type === 'characterData') {
+      const newValue = parseInt(targetNode.innerText.replace(/[^0-9]/g, ''), 10);
+      if (!isNaN(newValue)) {
+        updatePricingBasedOnValue(newValue);
+      }
+    }
+  }
+};
+
+const observer = new MutationObserver(callback);
+
+observer.observe(targetNode, config);
+
+// You might want to trigger it initially in case the value is already set
+const initialValue = parseInt(targetNode.innerText.replace(/[^0-9]/g, ''), 10);
+if (!isNaN(initialValue)) {
+  updatePricingBasedOnValue(initialValue);
+}
+
+
