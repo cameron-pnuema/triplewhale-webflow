@@ -695,52 +695,6 @@ const addListenerToCards = () => {
 };
 
 
-// Function to update recommended plan information
-function updateRecommendedPlan() {
-  // Find the element with either "recommended-card" or "recommended-border" class
-  const recommendedCard = document.querySelector('.pricing-card.recommended-card');
-  
-  if (recommendedCard) {
-    // Find the name and price elements within the recommended card
-    const nameElement = recommendedCard.querySelector('[recommende-tag="name"]');
-    const priceElement = recommendedCard.querySelector('[recommende-tag="price"]');
-    
-    if (nameElement && priceElement) {
-      const recommendedName = nameElement.textContent.trim();
-      const recommendedPrice = priceElement.textContent.trim();
-      
-      // Update elements with recommended-plan="name" attribute
-      document.querySelectorAll('[recommended-plan="name"]').forEach(element => {
-        element.textContent = recommendedName;
-      });
-      
-      // Update elements with recommended-price="digits" attribute
-      document.querySelectorAll('[recommended-price="digits"]').forEach(element => {
-        element.textContent = recommendedPrice;
-      });
-    }
-  }
-}
-
-// Set up a MutationObserver to watch for class changes
-const observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-      updateRecommendedPlan();
-    }
-  });
-});
-
-// Configure the observer to watch all pricing cards
-const pricingCards = document.querySelectorAll('.pricing-card');
-pricingCards.forEach(card => {
-  observer.observe(card, { attributes: true, attributeFilter: ['class'] });
-});
-
-// Initial call to set up the recommended plan
-updateRecommendedPlan();
-
-
 const addToggleListener = () => {
   const toggler = getElement("duration-toggle");
 
