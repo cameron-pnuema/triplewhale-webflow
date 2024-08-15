@@ -820,6 +820,86 @@ document.addEventListener('DOMContentLoaded', function() {
     setDefaultPriceElements(); // Set default text on initial load
 });
 
+// NEW update pricing UI
+function updatePricingUI(selectedOption) {
+  const priceVal = Number(selectedOption.getAttribute("fd-pricing-value")) - 1;
+  const range = selectedOption.getAttribute("fd-custom-range");
+
+  // Reset and update UI
+  lastClickedCard = '';
+  removeRecommendedBorderFromCards();
+
+  // Update selected price display
+  getElement("selected-price").innerText = selectedOption.innerText;
+  getElement("selected-price-wrapper").classList.remove("is-open");
+
+  // Handle slider change
+  handleSliderChange(priceVal);
+
+  // Set card prices and update price elements
+  setCardsPriceValue(range);
+
+  // Close dropdown and update UI elements
+  getElement("pricing-dropdowns").style.display = "none";
+  showDurationAndCurrency();
+  toggleDontToggleVisibility(false);
+}
+
+// Function to map input value to revenue range
+function mapValueToRevenueRange(value) {
+  const numValue = Number(value);
+  if (numValue < 250000) return "0-250K";
+  if (numValue < 500000) return "250-500K";
+  if (numValue < 1000000) return "500-1M";
+  if (numValue < 2500000) return "1-2.5M";
+  if (numValue < 5000000) return "2.5-5M";
+  if (numValue < 7500000) return "5-7.5M";
+  if (numValue < 10000000) return "7.5-10M";
+  if (numValue < 15000000) return "10-15M";
+  if (numValue < 20000000) return "15-20M";
+  if (numValue < 30000000) return "20-30M";
+  if (numValue < 40000000) return "30-40M";
+  if (numValue < 50000000) return "40-50M";
+  return "50M+";
+}
+
+// Function to update pricing based on input value
+function updatePricingFromInputValue(value) {
+  const range = mapValueToRevenueRange(value);
+  const selectedOption = document.querySelector(`.pricing-dropdown-item[fd-custom-range='${range}']`);
+  
+  if (selectedOption) {
+    updatePricingUI(selectedOption);
+  } else {
+    console.error(`No option found for range: ${range}`);
+  }
+}
+
+// Set up MutationObserver to watch for changes
+const targetNode = document.getElementById('fs-display-value');
+const observerOptions = {
+  characterData: true,
+  childList: true,
+  subtree: true
+};
+
+const observer = new MutationObserver((mutationsList, observer) => {
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'characterData' || mutation.type === 'childList') {
+      const newValue = targetNode.textContent;
+      updatePricingFromInputValue(newValue);
+      break;
+    }
+  }
+});
+
+// Start observing the target node for configured mutations
+observer.observe(targetNode, observerOptions);
+
+// Initial update
+updatePricingFromInputValue(targetNode.textContent);
+
+
 //
 const allOptions = document.querySelectorAll(".pricing-dropdown-item");
 allOptions.forEach((option) => {
