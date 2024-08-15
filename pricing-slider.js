@@ -882,30 +882,48 @@ const updatePricingBasedOnValue = (value) => {
   handleSliderChange(value);
 };
 
-// Observe changes in the fs-display-value element
-const targetNode = document.getElementById('fs-display-value');
+// Function to observe changes in fs-display-value
+const observeDisplayValueChanges = () => {
+  const targetNode = document.getElementById('fs-display-value');
 
-const config = { characterData: true, subtree: true, childList: true };
+  const config = { characterData: true, subtree: true, childList: true };
 
-const callback = (mutationsList) => {
-  for (let mutation of mutationsList) {
-    if (mutation.type === 'childList' || mutation.type === 'characterData') {
-      const newValue = parseInt(targetNode.innerText.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(newValue)) {
-        updatePricingBasedOnValue(newValue);
+  const callback = (mutationsList) => {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'childList' || mutation.type === 'characterData') {
+        const newValue = parseInt(targetNode.innerText.replace(/[^0-9]/g, ''), 10);
+        if (!isNaN(newValue)) {
+          updatePricingBasedOnValue(newValue);
+        }
       }
     }
+  };
+
+  const observer = new MutationObserver(callback);
+
+  observer.observe(targetNode, config);
+};
+
+// Trigger initial check
+const triggerInitialCheck = () => {
+  const targetNode = document.getElementById('fs-display-value');
+  const initialValue = parseInt(targetNode.innerText.replace(/[^0-9]/g, ''), 10);
+  if (!isNaN(initialValue)) {
+    updatePricingBasedOnValue(initialValue);
   }
 };
 
-const observer = new MutationObserver(callback);
+// Call the functions
+observeDisplayValueChanges();
+triggerInitialCheck();
 
-observer.observe(targetNode, config);
+// Example of updating the value directly
+document.getElementById('fs-display-value').innerText = "4500000";
 
-// You might want to trigger it initially in case the value is already set
-const initialValue = parseInt(targetNode.innerText.replace(/[^0-9]/g, ''), 10);
-if (!isNaN(initialValue)) {
-  updatePricingBasedOnValue(initialValue);
+// Manually trigger the update
+const newValue = parseInt(document.getElementById('fs-display-value').innerText.replace(/[^0-9]/g, ''), 10);
+if (!isNaN(newValue)) {
+  updatePricingBasedOnValue(newValue);
 }
 
 
