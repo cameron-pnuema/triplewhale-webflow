@@ -851,6 +851,17 @@ addAddonClickListener();
 
 addTabClickListener();
 
+// Format the number for display purposes
+function formatNumber(number) {
+    if (number < 1000000) {
+        return Math.round(number / 1000) + 'k';
+    } else if (number < 10000000) {
+        return (Math.round(number / 100000) / 10).toFixed(1) + 'M';
+    } else {
+        return Math.round(number / 1000000) + 'M';
+    }
+}
+
 // Function to determine the revenue range based on the value
 const determineRevenueRange = (value) => {
     if (value >= 50000000) return "50M+";
@@ -912,3 +923,4 @@ const initialValue = parseInt(targetNode.textContent.replace(/,/g, ''), 10);
 if (!isNaN(initialValue)) {
     updatePricingBasedOnValue(initialValue);
 }
+
