@@ -647,7 +647,7 @@ const initSliderAnimation = () => {
 
       getElement("pricing-dropdowns").style.display = "none";
 
-      toggleDontToggleVisibility(false); // Hide the div when a price is selected
+    //  toggleDontToggleVisibility(false); // Hide the div when a price is selected
     });
   });
 };
@@ -793,7 +793,7 @@ function setDefaultPriceElements() {
     element.innerText = "Pick Your Plan"; // Set default text
   });
 
-  toggleDontToggleVisibility(true); // Make the div visible
+  //toggleDontToggleVisibility(true); // Make the div visible
 }
 
 function updatePriceElements(growth, pro, enterprise) {
@@ -809,7 +809,7 @@ function updatePriceElements(growth, pro, enterprise) {
   proPrices.forEach((node) => (node.innerText = pro));
   enterprisePrices.forEach((node) => (node.innerText = enterprise));
 
-  toggleDontToggleVisibility(false); // Hide the div when prices are updated
+  //toggleDontToggleVisibility(false); // Hide the div when prices are updated
 }
 
 //
