@@ -256,9 +256,9 @@ const getYearlyPrices = (range) => {
  * Global Helper Functions
  */
 const getElement = (value) =>
-  document.querySelector(`[fd-custom-code="${value}"]`);
+  document.querySelector([fd-custom-code="${value}"]);
 const getElements = (value) =>
-  document.querySelectorAll(`[fd-custom-code="${value}"]`);
+  document.querySelectorAll([fd-custom-code="${value}"]);
 
 const addCommas = (num) => new Intl.NumberFormat("en-us").format(num);
 
@@ -366,7 +366,7 @@ const setPrice = (node, price) => {
 };
 
 const setAddonCost = (creative_cockpit) => {
-  getElement("addon-cost").innerText = `$${creative_cockpit}`;
+  getElement("addon-cost").innerText = $${creative_cockpit};
 };
 const setPricesToCustom = () => {
   growthPriceNodes.forEach((node) => setPrice(node, "Custom"));
@@ -384,7 +384,7 @@ const setYearlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  durationNodes.forEach((node) => (node.innerText = `${duration}`));
+  durationNodes.forEach((node) => (node.innerText = ${duration}));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
@@ -400,7 +400,7 @@ const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  durationNodes.forEach((node) => (node.innerText = `${duration}`));
+  durationNodes.forEach((node) => (node.innerText = ${duration}));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
@@ -432,7 +432,7 @@ const setTotalCost = (price, isEnterprise) => {
   }
 
   const totalCostNode = document.getElementById("tw-total-cost");
-  totalCostNode.innerText = `$${totalCost}`;
+  totalCostNode.innerText = $${totalCost};
 };
 
 const getSelectedTabPrice = () => {
@@ -471,11 +471,11 @@ const setAdditionalSupportText = (supports) => {
     supports.forEach((support) => {
       let div = document.createElement("div");
       div.classList.add("card-list-flex");
-      div.innerHTML = `
+      div.innerHTML = 
       <img src="https://assets-global.website-files.com/61bcbae3ae2e8ee49aa790b0/651ad7899a658b656c548cd9_647606ad31337d3beb5e2cc5_check-icon-brix-templates.svg.svg"
       loading="lazy" alt=""  class="tick-icon">
       <div>${support}</div>
-      `;
+      ;
       node.appendChild(div);
     });
   });
@@ -645,7 +645,7 @@ const initSliderAnimation = () => {
       // change selected price text
       const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
       const range = option.getAttribute("fd-custom-range");
-      getElement("selected-price").innerText = `${option.innerText}`;
+      getElement("selected-price").innerText = ${option.innerText};
       getElement("selected-price-wrapper").classList.remove("is-open");
       // toggle the dropdown
       handleSliderChange(priceVal);
@@ -695,7 +695,7 @@ const addListenerToCards = () => {
         allCards.forEach((item) => {
             const cardIconWrap = item.querySelector(".card-icon-wrap");
             if (cardIconWrap.classList.contains("vertical")) {
-                cardIconWrap.style.top = `0px`;
+                cardIconWrap.style.top = 0px;
             }
         });
     });
@@ -781,13 +781,13 @@ const handleScroll = () => {
 
     const windowWidth = window.innerWidth;
     if (windowWidth < 992) {
-      cardIconWrap.style.top = `${navHeight}px`;
+      cardIconWrap.style.top = ${navHeight}px;
       return;
     }
     if (cardIconWrap.classList.contains("vertical")) {
-      cardIconWrap.style.top = `0px`;
+      cardIconWrap.style.top = 0px;
     } else {
-      cardIconWrap.style.top = `${navHeight}px`;
+      cardIconWrap.style.top = ${navHeight}px;
     }
   });
 };
@@ -830,7 +830,7 @@ allOptions.forEach((option) => {
         
         const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
         const range = option.getAttribute("fd-custom-range");
-        getElement("selected-price").innerText = `${option.innerText}`;
+        getElement("selected-price").innerText = ${option.innerText};
         getElement("selected-price-wrapper").classList.remove("is-open");
         handleSliderChange(priceVal);
         const { growth, pro, enterprise } = setCardsPriceValue(range);
@@ -843,6 +843,29 @@ allOptions.forEach((option) => {
 /**
  * Function Calls
  */
+
+initSliderAnimation();
+addListenerToCards();
+
+addToggleListener();
+
+setCardsPriceValue(currentRange);
+
+addAddonClickListener();
+
+addTabClickListener();
+
+
+// Format the number for display purposes
+function formatNumber(number) {
+    if (number < 1000000) {
+        return Math.round(number / 1000) + 'k';
+    } else if (number < 10000000) {
+        return (Math.round(number / 100000) / 10).toFixed(1) + 'M';
+    } else {
+        return Math.round(number / 1000000) + 'M';
+    }
+}
 
 // Function to determine the revenue range based on the value
 const determineRevenueRange = (value) => {
@@ -861,64 +884,13 @@ const determineRevenueRange = (value) => {
     return "0-250K";
 };
 
-// Function to determine the recommended plan and price
-const determineRecommendedPlanAndPrice = (value) => {
-    let recommendedPlan = '';
-    let recommendedPrice = '';
-    const range = determineRevenueRange(value);
-
-    if (value >= 1000000 && value < 5000000) {
-        // Recommended plan is Pro
-        recommendedPlan = 'pro';
-        recommendedPrice = prices[range].monthly.pro;
-    } else if (value >= 5000000) {
-        // Recommended plan is Enterprise
-        recommendedPlan = 'enterprise';
-        recommendedPrice = prices[range].monthly.enterprise;
-    } else if (value >= 500000 && value < 1000000) {
-        // Recommended plan is Growth
-        recommendedPlan = 'growth';
-        recommendedPrice = prices[range].monthly.growth;
-    }
-
-    return { recommendedPlan, recommendedPrice };
-};
-
-// Function to update the recommended price and plan details
-const updateRecommendedDetails = (value) => {
-    const { recommendedPlan, recommendedPrice } = determineRecommendedPlanAndPrice(value);
-
-    // Update elements with the recommended price
-    const recommendedPriceElements = document.querySelectorAll('[recommended-price="digits"]');
-    recommendedPriceElements.forEach(element => {
-        element.textContent = recommendedPrice === "Custom" ? "Custom" : addCommas(recommendedPrice);
-    });
-
-    // Update elements with the recommended plan name
-    const recommendedPlanElements = document.querySelectorAll('[recommended-plan="name"]');
-    recommendedPlanElements.forEach(element => {
-        element.textContent = recommendedPlan.charAt(0).toUpperCase() + recommendedPlan.slice(1);
-    });
-
-    // Show/Hide custom buttons based on the price
-    const isCustom = recommendedPrice === "Custom";
-    document.getElementById('is-custom-button').style.display = isCustom ? 'block' : 'none';
-    document.getElementById('not-custom-button').style.display = isCustom ? 'none' : 'block';
-};
-
 // Function to update the pricing based on the value
 const updatePricingBasedOnValue = (value) => {
     const range = determineRevenueRange(value);
     setCardsPriceValue(range);
-
-    // Determine and update recommended plan and price
-    updateRecommendedDetails(value);
-
+    
     // Determine what plan should be recommended
     handleSliderChange(value);
-
-    // Show the duration and currency elements
-    showDurationAndCurrency();
 };
 
 // Function to handle both formatting and pricing updates
@@ -956,11 +928,3 @@ const initialValue = parseInt(targetNode.textContent.replace(/,/g, ''), 10);
 if (!isNaN(initialValue)) {
     updatePricingBasedOnValue(initialValue);
 }
-
-// Existing functions and event listeners here
-initSliderAnimation();
-addListenerToCards();
-addToggleListener();
-setCardsPriceValue(currentRange);
-addAddonClickListener();
-addTabClickListener();
