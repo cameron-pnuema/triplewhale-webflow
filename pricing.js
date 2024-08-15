@@ -850,3 +850,65 @@ setCardsPriceValue(currentRange);
 addAddonClickListener();
 
 addTabClickListener();
+
+// Function to determine the revenue range based on the value
+const determineRevenueRange = (value) => {
+    if (value >= 50000000) return "50M+";
+    if (value >= 40000000) return "40-50M";
+    if (value >= 30000000) return "30-40M";
+    if (value >= 20000000) return "20-30M";
+    if (value >= 15000000) return "15-20M";
+    if (value >= 10000000) return "10-15M";
+    if (value >= 7500000) return "7.5-10M";
+    if (value >= 5000000) return "5-7.5M";
+    if (value >= 2500000) return "2.5-5M";
+    if (value >= 1000000) return "1-2.5M";
+    if (value >= 500000) return "500-1M";
+    if (value >= 250000) return "250-500K";
+    return "0-250K";
+};
+
+// Function to update the pricing based on the value
+const updatePricingBasedOnValue = (value) => {
+    const range = determineRevenueRange(value);
+    setCardsPriceValue(range);
+    
+    // Determine what plan should be recommended
+    handleSliderChange(value);
+};
+
+// Function to handle both formatting and pricing updates
+function updateCopyDigits() {
+    const displayValue = document.getElementById('fs-display-value');
+    if (!displayValue) return;
+
+    const value = parseInt(displayValue.textContent.replace(/,/g, ''), 10);
+    if (isNaN(value)) return;
+
+    const formattedValue = formatNumber(value);
+
+    // Update elements with the formatted value
+    const copyDigitsElements = document.querySelectorAll('[copy-digits="value"]');
+    copyDigitsElements.forEach(element => {
+        element.textContent = formattedValue;
+    });
+
+    // Trigger the pricing update
+    updatePricingBasedOnValue(value);
+}
+
+// Run the function initially
+updateCopyDigits();
+
+// Set up a MutationObserver to watch for changes in the fs-display-value element
+const targetNode = document.getElementById('fs-display-value');
+if (targetNode) {
+    const observer = new MutationObserver(updateCopyDigits);
+    observer.observe(targetNode, { childList: true, characterData: true, subtree: true });
+}
+
+// Optional: Trigger initial check if the value is already set
+const initialValue = parseInt(targetNode.textContent.replace(/,/g, ''), 10);
+if (!isNaN(initialValue)) {
+    updatePricingBasedOnValue(initialValue);
+}
