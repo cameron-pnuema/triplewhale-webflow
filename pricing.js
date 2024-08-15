@@ -861,19 +861,65 @@ const determineRevenueRange = (value) => {
     return "0-250K";
 };
 
+// Function to get the price based on the range and plan type
+const getPriceForPlan = (range, plan) => {
+    if (selectedDuration === "monthly") {
+        return prices[range].monthly[plan];
+    } else {
+        return prices[range].yearly[plan];
+    }
+};
+
+// Function to determine and update the recommended plan and price
+const updateRecommendedDetails = (value) => {
+    let recommendedPlan = "";
+    let recommendedPrice = "";
+
+    if (value >= 5000000) {
+        recommendedPlan = "enterprise";
+    } else if (value >= 1000000 && value < 5000000) {
+        recommendedPlan = "pro";
+    } else if (value >= 500000 && value < 1000000) {
+        recommendedPlan = "growth";
+    } else {
+        recommendedPlan = "free";  // Assuming free is the fallback, though your logic doesn't define it.
+    }
+
+    // Determine the corresponding revenue range
+    const range = determineRevenueRange(value);
+
+    // Get the price for the recommended plan
+    recommendedPrice = getPriceForPlan(range, recommendedPlan);
+
+    // Update elements with the recommended price
+    const recommendedPriceElements = document.querySelectorAll('[recommended-price="digits"]');
+    recommendedPriceElements.forEach(element => {
+        element.textContent = recommendedPrice === "Custom" ? "Custom" : addCommas(recommendedPrice);
+    });
+
+    // Update elements with the recommended plan name
+    const recommendedPlanElements = document.querySelectorAll('[recommended-plan="name"]');
+    recommendedPlanElements.forEach(element => {
+        element.textContent = recommendedPlan.charAt(0).toUpperCase() + recommendedPlan.slice(1);
+    });
+
+    // Show/Hide custom buttons based on the price
+    const isCustom = recommendedPrice === "Custom";
+    document.getElementById('is-custom-button').style.display = isCustom ? 'block' : 'none';
+    document.getElementById('not-custom-button').style.display = isCustom ? 'none' : 'block';
+};
+
 // Function to update the pricing based on the value
 const updatePricingBasedOnValue = (value) => {
     const range = determineRevenueRange(value);
     setCardsPriceValue(range);
     
-    // Determine what plan should be recommended
+    // Determine what plan should be recommended and update the recommended details
     handleSliderChange(value);
+    updateRecommendedDetails(value);
 
     // Show the duration and currency elements
     showDurationAndCurrency();
-    
-    // Update the recommended price and plan name
-    updateRecommendedDetails();
 };
 
 // Function to handle both formatting and pricing updates
@@ -894,32 +940,6 @@ function updateCopyDigits() {
 
     // Trigger the pricing update
     updatePricingBasedOnValue(value);
-}
-
-// Function to update recommended price and plan details
-const updateRecommendedDetails = () => {
-    const recommendedCard = document.querySelector('.recommended-card');
-    if (!recommendedCard) return;
-
-    const recommendedPrice = recommendedCard.querySelector('[price]').getAttribute('price');
-    const recommendedPlan = recommendedCard.getAttribute('fd-custom-code').replace('-card', '');
-
-    // Update elements with the recommended price
-    const recommendedPriceElements = document.querySelectorAll('[recommended-price="digits"]');
-    recommendedPriceElements.forEach(element => {
-        element.textContent = recommendedPrice === "Custom" ? "Custom" : addCommas(recommendedPrice);
-    });
-
-    // Update elements with the recommended plan name
-    const recommendedPlanElements = document.querySelectorAll('[recommended-plan="name"]');
-    recommendedPlanElements.forEach(element => {
-        element.textContent = recommendedPlan.charAt(0).toUpperCase() + recommendedPlan.slice(1);
-    });
-
-    // Show/Hide custom buttons based on the price
-    const isCustom = recommendedPrice === "Custom";
-    document.getElementById('is-custom-button').style.display = isCustom ? 'block' : 'none';
-    document.getElementById('not-custom-button').style.display = isCustom ? 'none' : 'block';
 }
 
 // Run the function initially
