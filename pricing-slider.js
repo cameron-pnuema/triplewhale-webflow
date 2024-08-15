@@ -899,6 +899,65 @@ observer.observe(targetNode, observerOptions);
 // Initial update
 updatePricingFromInputValue(targetNode.textContent);
 
+//checking for errors
+// Function to map input value to revenue range
+function mapValueToRevenueRange(value) {
+  const numValue = Number(value);
+  console.log("Mapping value:", numValue);
+  // ... rest of the function remains the same ...
+}
+
+// Function to update pricing based on input value
+function updatePricingFromInputValue(value) {
+  console.log("Updating pricing for value:", value);
+  const range = mapValueToRevenueRange(value);
+  console.log("Mapped to range:", range);
+  const selectedOption = document.querySelector(`.pricing-dropdown-item[fd-custom-range='${range}']`);
+  
+  if (selectedOption) {
+    console.log("Found option:", selectedOption);
+    updatePricingUI(selectedOption);
+  } else {
+    console.error(`No option found for range: ${range}`);
+  }
+}
+
+// Set up MutationObserver to watch for changes
+const targetNode = document.getElementById('fs-display-value');
+if (!targetNode) {
+  console.error("Element with ID 'fs-display-value' not found");
+} else {
+  console.log("Observer set up for element:", targetNode);
+}
+
+const observerOptions = {
+  characterData: true,
+  childList: true,
+  subtree: true
+};
+
+const observer = new MutationObserver((mutationsList, observer) => {
+  console.log("Mutation observed");
+  for (let mutation of mutationsList) {
+    if (mutation.type === 'characterData' || mutation.type === 'childList') {
+      const newValue = targetNode.textContent;
+      console.log("New value detected:", newValue);
+      updatePricingFromInputValue(newValue);
+      break;
+    }
+  }
+});
+
+// Start observing the target node for configured mutations
+if (targetNode) {
+  observer.observe(targetNode, observerOptions);
+  console.log("Observer started");
+  
+  // Initial update
+  console.log("Performing initial update");
+  updatePricingFromInputValue(targetNode.textContent);
+}
+
 
 //
 const allOptions = document.querySelectorAll(".pricing-dropdown-item");
