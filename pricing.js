@@ -906,6 +906,10 @@ function updateCopyDigits() {
 
     // Trigger the pricing update
     updatePricingBasedOnValue(value);
+
+     if (value >= 100000) {
+        showDurationAndCurrency();
+    }
 }
 
 // Run the function initially
