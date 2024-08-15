@@ -603,12 +603,12 @@ const showDurationAndCurrency = () => {
 };
 
 // Function to toggle the visibility of the "dont-toggle" div
-function toggleDontToggleVisibility(isVisible) {
+/* function toggleDontToggleVisibility(isVisible) {
   const dontToggleElement = document.getElementById("dont-toggle");
   if (dontToggleElement) {
     dontToggleElement.style.display = isVisible ? "block" : "none";
   }
-}
+} */
 
 const initSliderAnimation = () => {
   hideDurationAndCurrency(); // Hide elements by default
