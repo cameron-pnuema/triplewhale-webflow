@@ -844,18 +844,6 @@ allOptions.forEach((option) => {
  * Function Calls
  */
 
-initSliderAnimation();
-addListenerToCards();
-
-addToggleListener();
-
-setCardsPriceValue(currentRange);
-
-addAddonClickListener();
-
-addTabClickListener();
-
-
 // Function to determine the revenue range based on the value
 const determineRevenueRange = (value) => {
     if (value >= 50000000) return "50M+";
@@ -951,4 +939,9 @@ if (!isNaN(initialValue)) {
 }
 
 // Existing functions and event listeners here
-
+initSliderAnimation();
+addListenerToCards();
+addToggleListener();
+setCardsPriceValue(currentRange);
+addAddonClickListener();
+addTabClickListener();
