@@ -431,6 +431,9 @@ const setPricesToCustom = () => {
   growthPriceNodes.forEach((node) => setPrice(node, "Custom"));
   proPriceNodes.forEach((node) => setPrice(node, "Custom"));
   enterprisePriceNodes.forEach((node) => setPrice(node, "Custom"));
+  premiumPriceNodes.forEach((node) => setPrice(node, "Custom"));
+  premiumPlusPriceNodes.forEach((node) => setPrice(node, "Custom"));
+  
   durationNodes.forEach((node) => (node.innerText = ""));
   currencyNodes.forEach((node) => (node.innerText = ""));
 
