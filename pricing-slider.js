@@ -754,7 +754,7 @@ function toggleDontToggleVisibility(isVisible) {
 }
 
 const initSliderAnimation = () => {
-  hideDurationAndCurrency(); // Hide elements by default
+  // hideDurationAndCurrency(); // Hide elements by default
 
   getElement("pricing-dropdown-container").addEventListener("click", () => {
     if (!isOpen) {
