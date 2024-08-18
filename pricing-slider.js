@@ -570,6 +570,20 @@ const setAdditionalSupportText = (supports) => {
   });
 };
 
+const hideRecClassElements = (value) => {
+  const recClassElements = document.querySelectorAll('.rec-class');
+  
+  if (value < 500000) {
+    recClassElements.forEach((element) => {
+      element.style.display = 'none';
+    });
+  } else {
+    recClassElements.forEach((element) => {
+      element.style.display = '';
+    });
+  }
+};
+
 
 /** helper functions end */
 let currentRange = "0-250K";
@@ -654,6 +668,8 @@ const handleSliderChange = (value) => {
   removeRecommendedClassFromCards();
   hideEnterpriseForm();
   hideAllCards();
+  // Call the function to hide rec-class elements if below 500K
+  hideRecClassElements(value);
 
   if (value >= 10000000) {
     // Show and recommend the Enterprise plan for 10M+
