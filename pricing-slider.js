@@ -657,6 +657,7 @@ const handleSliderChange = (value) => {
 
   if (value >= 10000000) {
     // Show and recommend the Enterprise plan for 10M+
+    setPricesToCustom();
     addRecommendedClass(getElement("enterprise-card"));
     addRecommendedBorder(getElement("enterprise-card"));
     lastRecommendedCard = "enterprise-card";
