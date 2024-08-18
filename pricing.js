@@ -47,16 +47,12 @@ const prices = {
       pro: 199,
       enterprise: 279,
       creative_cockpit: 79,
-      premium: 279,
-      premiumPlus: 478
     },
     yearly: {
       growth: 1290,
       pro: 1990,
       enterprise: 2790,
       creative_cockpit: 790,
-      premium: 2808,
-      premiumPlus: 4824
     },
   },
   "250-500K": {
@@ -65,16 +61,12 @@ const prices = {
       pro: 299,
       enterprise: 379,
       creative_cockpit: 99,
-      premium: 379,
-      premiumPlus: 678
     },
     yearly: {
       growth: 1990,
       pro: 2990,
       enterprise: 3790,
       creative_cockpit: 990,
-      premium: 3816,
-      premiumPlus: 6840
     },
   },
   "500-1M": {
@@ -83,16 +75,12 @@ const prices = {
       pro: 399,
       enterprise: 499,
       creative_cockpit: 99,
-      premium: 499,
-      premiumPlus: 898
     },
     yearly: {
       growth: 2990,
       pro: 3990,
       enterprise: 4990,
       creative_cockpit: 990,
-      premium: 5028,
-      premiumPlus: 9048
     },
   },
   "1-2.5M": {
@@ -101,16 +89,12 @@ const prices = {
       pro: 499,
       enterprise: 599,
       creative_cockpit: 149,
-      premium: 599,
-      premiumPlus: 1098
     },
     yearly: {
       growth: 3990,
       pro: 4990,
       enterprise: 5990,
       creative_cockpit: 1490,
-      premium: 6036,
-      premiumPlus: 11064
     },
   },
   "2.5-5M": {
@@ -119,16 +103,12 @@ const prices = {
       pro: 649,
       enterprise: 799,
       creative_cockpit: 199,
-      premium: 799,
-      premiumPlus: 1448
     },
     yearly: {
       growth: 5990,
       pro: 6490,
       enterprise: 7990,
       creative_cockpit: 1990,
-      premium: 8052,
-      premiumPlus: 14592
     },
   },
   "5-7.5M": {
@@ -137,16 +117,12 @@ const prices = {
       pro: 999,
       enterprise: 1149,
       creative_cockpit: 249,
-      premium: 1149,
-      premiumPlus: 2148
     },
     yearly: {
       growth: 7990,
       pro: 9990,
       enterprise: 11490,
       creative_cockpit: 2490,
-      premium: 11580,
-      premiumPlus: 21648
     },
   },
   "7.5-10M": {
@@ -155,16 +131,12 @@ const prices = {
       pro: 1299,
       enterprise: 1499,
       creative_cockpit: 299,
-      premium: 1499,
-      premiumPlus: 2798
     },
     yearly: {
       growth: 11490,
       pro: 12990,
       enterprise: 14990,
       creative_cockpit: 2990,
-      premium: 15108,
-      premiumPlus: 28200
     },
   },
   "10-15M": {
@@ -173,16 +145,12 @@ const prices = {
       pro: 1699,
       enterprise: 1999,
       creative_cockpit: 399,
-      premium: 1999,
-      premiumPlus: 3698
     },
     yearly: {
       growth: 14990,
       pro: 16990,
       enterprise: 19990,
       creative_cockpit: 3990,
-      premium: 20148,
-      premiumPlus: 37272
     },
   },
   "15-20M": {
@@ -191,16 +159,12 @@ const prices = {
       pro: 1999,
       enterprise: 2499,
       creative_cockpit: 499,
-      premium: 2499,
-      premiumPlus: 4498
     },
     yearly: {
       growth: 17990,
       pro: 19990,
       enterprise: 24990,
       creative_cockpit: 4990,
-      premium: 25188,
-      premiumPlus: 45336
     },
   },
   "20-30M": {
@@ -209,16 +173,12 @@ const prices = {
       pro: 2499,
       enterprise: 3199,
       creative_cockpit: 599,
-      premium: 3199,
-      premiumPlus: 5698
     },
     yearly: {
       growth: 21990,
       pro: 24990,
       enterprise: 31990,
       creative_cockpit: 5990,
-      premium: 32244,
-      premiumPlus: 57432
     },
   },
   "30-40M": {
@@ -227,16 +187,12 @@ const prices = {
       pro: 3199,
       enterprise: 3799,
       creative_cockpit: 699,
-      premium: 3799,
-      premiumPlus: 6998
     },
     yearly: {
       growth: 27990,
       pro: 31990,
       enterprise: 37990,
       creative_cockpit: 6990,
-      premium: 38292,
-      premiumPlus: 70536
     },
   },
   "40-50M": {
@@ -245,16 +201,12 @@ const prices = {
       pro: 3799,
       enterprise: 4499,
       creative_cockpit: 799,
-      premium: 4499,
-      premiumPlus: 8298
     },
     yearly: {
       growth: 34990,
       pro: 37990,
       enterprise: 44990,
       creative_cockpit: 7990,
-      premium: 45348,
-      premiumPlus: 83640
     },
   },
   "50M+": {
@@ -263,23 +215,18 @@ const prices = {
       pro: "Custom",
       enterprise: "Custom",
       creative_cockpit: "Custom",
-      premium: "Custom",
-      premiumPlus: "Custom"
     },
     yearly: {
       growth: "Custom",
       pro: "Custom",
       enterprise: "Custom",
       creative_cockpit: "Custom",
-      premium: "Custom",
-      premiumPlus: "Custom"
     },
   },
 };
-
 const getMonthlyPrices = (range) => {
   const {
-    monthly: { growth, pro, enterprise, creative_cockpit, premium, premiumPlus },
+    monthly: { growth, pro, enterprise, creative_cockpit },
   } = prices[range];
 
   return {
@@ -287,33 +234,27 @@ const getMonthlyPrices = (range) => {
     pro,
     enterprise,
     creative_cockpit,
-    premium,
-    premiumPlus
   };
 };
 
 const getYearlyPrices = (range) => {
   const {
-    yearly: { growth, pro, enterprise, creative_cockpit, premium, premiumPlus },
+    yearly: { growth, pro, enterprise, creative_cockpit },
   } = prices[range];
   return {
     growth,
     pro,
     enterprise,
     creative_cockpit,
-    premium,
-    premiumPlus
   };
 };
-
-
 /**
  * Global Helper Functions
  */
 const getElement = (value) =>
-  document.querySelector([fd-custom-code="${value}"]);
+  document.querySelector(`[fd-custom-code="${value}"]`);
 const getElements = (value) =>
-  document.querySelectorAll([fd-custom-code="${value}"]);
+  document.querySelectorAll(`[fd-custom-code="${value}"]`);
 
 const addCommas = (num) => new Intl.NumberFormat("en-us").format(num);
 
@@ -411,56 +352,53 @@ const proPriceNodes = getElements("pro-price");
 const enterprisePriceNodes = getElements("enterprise-price");
 const durationNodes = getElements("duration");
 const currencyNodes = getElements("currency");
-const premiumPriceNodes = getElements("premium-price");
-const premiumPlusPriceNodes = getElements("premiumPlus-price");
 
 const setPrice = (node, price) => {
   node.innerText = price === "Custom" ? "Custom" : addCommas(price);
   node.setAttribute("price", price);
 };
 
+const setAddonCost = (creative_cockpit) => {
+  getElement("addon-cost").innerText = `$${creative_cockpit}`;
+};
 const setPricesToCustom = () => {
   growthPriceNodes.forEach((node) => setPrice(node, "Custom"));
   proPriceNodes.forEach((node) => setPrice(node, "Custom"));
   enterprisePriceNodes.forEach((node) => setPrice(node, "Custom"));
-  premiumPriceNodes.forEach((node) => setPrice(node, "Custom"));
-  premiumPlusPriceNodes.forEach((node) => setPrice(node, "Custom"));
   durationNodes.forEach((node) => (node.innerText = ""));
   currencyNodes.forEach((node) => (node.innerText = ""));
 
+  //   setTotalCost("Custom", false);
   setAddonCost("Custom");
 };
 
-
-const setYearlyPrices = (growth, pro, enterprise, creative_cockpit, premium, premiumPlus) => {
+const setYearlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   let duration = selectedDuration === "yearly" ? "/year" : "/month";
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  premiumPriceNodes.forEach((node) => setPrice(node, premium));
-  premiumPlusPriceNodes.forEach((node) => setPrice(node, premiumPlus));
   durationNodes.forEach((node) => (node.innerText = `${duration}`));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
+  /** set addon cost */
   setAddonCost(creative_cockpit);
-};
+
   /** set total cost */
   //   const { selectedTabPrice, isEnterprise } = getSelectedTabPrice();
   //   setTotalCost(selectedTabPrice, isEnterprise);
 };
 
-const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit, premium, premiumPlus) => {
+const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit) => {
   let duration = selectedDuration === "yearly" ? "/year" : "/month";
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
   enterprisePriceNodes.forEach((node) => setPrice(node, enterprise));
-  premiumPriceNodes.forEach((node) => setPrice(node, premium));
-  premiumPlusPriceNodes.forEach((node) => setPrice(node, premiumPlus));
   durationNodes.forEach((node) => (node.innerText = `${duration}`));
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
+  /** set addon cost */
   setAddonCost(creative_cockpit);
-};
+
   /** set total cost */
   //   const { selectedTabPrice, isEnterprise } = getSelectedTabPrice();
   //   setTotalCost(selectedTabPrice, isEnterprise);
@@ -487,7 +425,7 @@ const setTotalCost = (price, isEnterprise) => {
   }
 
   const totalCostNode = document.getElementById("tw-total-cost");
-  totalCostNode.innerText = $${totalCost};
+  totalCostNode.innerText = `$${totalCost}`;
 };
 
 const getSelectedTabPrice = () => {
@@ -525,11 +463,11 @@ const setAdditionalSupportText = (supports) => {
     supports.forEach((support) => {
       let div = document.createElement("div");
       div.classList.add("card-list-flex");
-      div.innerHTML = 
+      div.innerHTML = `
       <img src="https://assets-global.website-files.com/61bcbae3ae2e8ee49aa790b0/651ad7899a658b656c548cd9_647606ad31337d3beb5e2cc5_check-icon-brix-templates.svg.svg"
       loading="lazy" alt=""  class="tick-icon">
       <div>${support}</div>
-      ;
+      `;
       node.appendChild(div);
     });
   });
@@ -546,65 +484,77 @@ const setCardsPriceValue = (range = currentRange) => {
   }
 
   if (selectedDuration === "monthly") {
-    const { growth, pro, enterprise, creative_cockpit, premium, premiumPlus } = getMonthlyPrices(range);
-    setMonthlyPrices(growth, pro, enterprise, creative_cockpit, premium, premiumPlus);
+    const { growth, pro, enterprise, creative_cockpit } =
+      getMonthlyPrices(range);
+    setMonthlyPrices(growth, pro, enterprise, creative_cockpit);
   } else {
-    const { growth, pro, enterprise, creative_cockpit, premium, premiumPlus } = getYearlyPrices(range);
-    setYearlyPrices(growth, pro, enterprise, creative_cockpit, premium, premiumPlus);
+    const { growth, pro, enterprise, creative_cockpit } =
+      getYearlyPrices(range);
+    setYearlyPrices(growth, pro, enterprise, creative_cockpit);
   }
 };
 
 const handleSliderChange = (value) => {
   const ctaOfGrowth = getElement("growth-card").querySelector(".card-demo-btn");
-  
+  /**
+   * Cards Animiations based on slider value
+   */
+
   removeRecommendedClassFromCards();
   hideEnterpriseForm();
   hideAllCards();
-
   if (value >= 5000000) {
+    // show enterprise and pro for price >= 5 Million
     showCard(getElement("enterprise-card"));
     showCard(getElement("pro-card"));
-    showCard(getElement("premium-card"));
-    showCard(getElement("premiumPlus-card"));
-    addRecommendedClass(getElement("premiumPlus-card"));
-    addRecommendedBorder(getElement("premiumPlus-card"));
-    lastRecommendedCard = "premiumPlus-card";
+    //show the form of the enterprise card
+    addRecommendedClass(getElement("enterprise-card"));
+    addRecommendedBorder(getElement("enterprise-card"));
+    lastRecommendedCard = "enterprise-card";
     showEnterpriseForm();
   } else {
+    /** Change CTA of growth card */
     if (value < 500000) {
+      // change the button text and link of Growth Card
       ctaOfGrowth.innerText = "Get Started";
       ctaOfGrowth.setAttribute("href", "https://app.triplewhale.com/signup");
     } else if (value < 1000000) {
+      // change the button text and link of Growth Card
       ctaOfGrowth.innerText = "Get Started";
+      // ctaOfGrowth.setAttribute("href", "https://www.triplewhale.com/bookdemo");
       ctaOfGrowth.setAttribute("href", "https://app.triplewhale.com/signup");
     }
     decreaseCardSize(getElement("enterprise-card"));
 
+    /** 
+      Recommended card Logic based on value 
+    */
     if (value >= 1000000 && value < 5000000) {
+      // add recommended to pro card and show pro and enterprise card
       showEnterpriseForm();
-      addRecommendedClass(getElement("premium-card"));
-      addRecommendedBorder(getElement("premium-card"));
-      lastRecommendedCard = "premium-card";
-      showCard(getElement("pro-card"));
-      showCard(getElement("premium-card"));
-      showCard(getElement("premiumPlus-card"));
-    } else if (value >= 500000 && value < 1000000) {
       addRecommendedClass(getElement("pro-card"));
       addRecommendedBorder(getElement("pro-card"));
       lastRecommendedCard = "pro-card";
-      showCard(getElement("growth-card"));
       showCard(getElement("pro-card"));
-      showCard(getElement("premium-card"));
-    } else if (value < 500000) {
+      showCard(getElement("enterprise-card"));
+    } else if (value >= 500000 && value < 1000000) {
+      // add recommended to growth card & Show growth and pro card
       addRecommendedClass(getElement("growth-card"));
       addRecommendedBorder(getElement("growth-card"));
       lastRecommendedCard = "growth-card";
-      showCard(getElement("free-card"));
       showCard(getElement("growth-card"));
       showCard(getElement("pro-card"));
+    } else if (value < 500000) {
+      // add recommended to free card & show free and growth card
+      addRecommendedClass(getElement("free-card"));
+      addRecommendedBorder(getElement("free-card"));
+      lastRecommendedCard = "free-card";
+      showCard(getElement("free-card"));
+      showCard(getElement("growth-card"));
     }
   }
 
+  /** Setting additional support text */
   const supportTexts = getAdditionalSupportText(value);
   setAdditionalSupportText(supportTexts);
 };
@@ -687,7 +637,7 @@ const initSliderAnimation = () => {
       // change selected price text
       const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
       const range = option.getAttribute("fd-custom-range");
-      getElement("selected-price").innerText = ${option.innerText};
+      getElement("selected-price").innerText = `${option.innerText}`;
       getElement("selected-price-wrapper").classList.remove("is-open");
       // toggle the dropdown
       handleSliderChange(priceVal);
@@ -697,7 +647,7 @@ const initSliderAnimation = () => {
 
       getElement("pricing-dropdowns").style.display = "none";
 
-    //  toggleDontToggleVisibility(false); // Hide the div when a price is selected
+      //  toggleDontToggleVisibility(false); // Hide the div when a price is selected
     });
   });
 };
@@ -737,13 +687,12 @@ const addListenerToCards = () => {
       allCards.forEach((item) => {
         const cardIconWrap = item.querySelector(".card-icon-wrap");
         if (cardIconWrap.classList.contains("vertical")) {
-          cardIconWrap.style.top = 0px;
+          cardIconWrap.style.top = `0px`;
         }
       });
     });
   });
 };
-
 
 const addToggleListener = () => {
   const toggler = getElement("duration-toggle");
@@ -752,7 +701,7 @@ const addToggleListener = () => {
     selectedDuration = selectedDuration === "yearly" ? "monthly" : "yearly";
 
     setCardsPriceValue();
-    updateRecommendedPlan()
+    updateRecommendedPlan();
 
     // logic for setting total cost
     // const { selectedTabPrice, isEnterprise } = getSelectedTabPrice();
@@ -825,13 +774,13 @@ const handleScroll = () => {
 
     const windowWidth = window.innerWidth;
     if (windowWidth < 992) {
-      cardIconWrap.style.top = ${navHeight}px;
+      cardIconWrap.style.top = `${navHeight}px`;
       return;
     }
     if (cardIconWrap.classList.contains("vertical")) {
-      cardIconWrap.style.top = 0px;
+      cardIconWrap.style.top = `0px`;
     } else {
-      cardIconWrap.style.top = ${navHeight}px;
+      cardIconWrap.style.top = `${navHeight}px`;
     }
   });
 };
@@ -879,7 +828,7 @@ allOptions.forEach((option) => {
 
     const priceVal = Number(option.getAttribute("fd-pricing-value")) - 1;
     const range = option.getAttribute("fd-custom-range");
-    getElement("selected-price").innerText = ${option.innerText};
+    getElement("selected-price").innerText = `${option.innerText}`;
     getElement("selected-price-wrapper").classList.remove("is-open");
     handleSliderChange(priceVal);
     const { growth, pro, enterprise } = setCardsPriceValue(range);
@@ -905,77 +854,81 @@ addTabClickListener();
 
 // Format the number for display purposes
 function formatNumber(number) {
-    if (number < 1000000) {
-        return Math.round(number / 1000) + 'k';
-    } else if (number < 10000000) {
-        return (Math.round(number / 100000) / 10).toFixed(1) + 'M';
-    } else {
-        return Math.round(number / 1000000) + 'M';
-    }
+  if (number < 1000000) {
+    return Math.round(number / 1000) + "k";
+  } else if (number < 10000000) {
+    return (Math.round(number / 100000) / 10).toFixed(1) + "M";
+  } else {
+    return Math.round(number / 1000000) + "M";
+  }
 }
 
 // Function to determine the revenue range based on the value
 const determineRevenueRange = (value) => {
-    if (value >= 50000000) return "50M+";
-    if (value >= 40000000) return "40-50M";
-    if (value >= 30000000) return "30-40M";
-    if (value >= 20000000) return "20-30M";
-    if (value >= 15000000) return "15-20M";
-    if (value >= 10000000) return "10-15M";
-    if (value >= 7500000) return "7.5-10M";
-    if (value >= 5000000) return "5-7.5M";
-    if (value >= 2500000) return "2.5-5M";
-    if (value >= 1000000) return "1-2.5M";
-    if (value >= 500000) return "500-1M";
-    if (value >= 250000) return "250-500K";
-    return "0-250K";
+  if (value >= 50000000) return "50M+";
+  if (value >= 40000000) return "40-50M";
+  if (value >= 30000000) return "30-40M";
+  if (value >= 20000000) return "20-30M";
+  if (value >= 15000000) return "15-20M";
+  if (value >= 10000000) return "10-15M";
+  if (value >= 7500000) return "7.5-10M";
+  if (value >= 5000000) return "5-7.5M";
+  if (value >= 2500000) return "2.5-5M";
+  if (value >= 1000000) return "1-2.5M";
+  if (value >= 500000) return "500-1M";
+  if (value >= 250000) return "250-500K";
+  return "0-250K";
 };
 
 // Function to update the pricing based on the value
 const updatePricingBasedOnValue = (value) => {
-    const range = determineRevenueRange(value);
-    setCardsPriceValue(range);
-    
-    // Determine what plan should be recommended
-    handleSliderChange(value);
+  const range = determineRevenueRange(value);
+  setCardsPriceValue(range);
+
+  // Determine what plan should be recommended
+  handleSliderChange(value);
 };
 
 // Function to handle both formatting and pricing updates
 function updateCopyDigits() {
-    const displayValue = document.getElementById('fs-display-value');
-    if (!displayValue) return;
+  const displayValue = document.getElementById("fs-display-value");
+  if (!displayValue) return;
 
-    const value = parseInt(displayValue.textContent.replace(/,/g, ''), 10);
-    if (isNaN(value)) return;
+  const value = parseInt(displayValue.textContent.replace(/,/g, ""), 10);
+  if (isNaN(value)) return;
 
-    const formattedValue = formatNumber(value);
+  const formattedValue = formatNumber(value);
 
-    // Update elements with the formatted value
-    const copyDigitsElements = document.querySelectorAll('[copy-digits="value"]');
-    copyDigitsElements.forEach(element => {
-        element.textContent = formattedValue;
-    });
+  // Update elements with the formatted value
+  const copyDigitsElements = document.querySelectorAll('[copy-digits="value"]');
+  copyDigitsElements.forEach((element) => {
+    element.textContent = formattedValue;
+  });
 
-    // Trigger the pricing update
-    updatePricingBasedOnValue(value);
+  // Trigger the pricing update
+  updatePricingBasedOnValue(value);
 
-     if (value >= 100000) {
-        showDurationAndCurrency();
-    }
+  if (value >= 100000) {
+    showDurationAndCurrency();
+  }
 }
 
 // Run the function initially
 updateCopyDigits();
 
 // Set up a MutationObserver to watch for changes in the fs-display-value element
-const targetNode = document.getElementById('fs-display-value');
+const targetNode = document.getElementById("fs-display-value");
 if (targetNode) {
-    const observer = new MutationObserver(updateCopyDigits);
-    observer.observe(targetNode, { childList: true, characterData: true, subtree: true });
+  const observer = new MutationObserver(updateCopyDigits);
+  observer.observe(targetNode, {
+    childList: true,
+    characterData: true,
+    subtree: true,
+  });
 }
 
 // Optional: Trigger initial check if the value is already set
-const initialValue = parseInt(targetNode.textContent.replace(/,/g, ''), 10);
+const initialValue = parseInt(targetNode.textContent.replace(/,/g, ""), 10);
 if (!isNaN(initialValue)) {
-    updatePricingBasedOnValue(initialValue);
+  updatePricingBasedOnValue(initialValue);
 }
