@@ -441,7 +441,7 @@ const setPricesToCustom = () => {
   setAddonCost("Custom");
 };
 
-const setYearlyPrices = (growth, pro, enterprise, premium, premiumPlus, creative_cockpit) => {
+const setYearlyPrices = (growth, pro, enterprise, creative_cockpit, premium, premiumPlus) => {
   let duration = selectedDuration === "yearly" ? "/year" : "/month";
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
@@ -458,7 +458,7 @@ const setYearlyPrices = (growth, pro, enterprise, premium, premiumPlus, creative
   //   setTotalCost(selectedTabPrice, isEnterprise);
 };
 
-const setMonthlyPrices = (growth, pro, enterprise, premium, premiumPlus, creative_cockpit) => {
+const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit, premium, premiumPlus) => {
   let duration = selectedDuration === "yearly" ? "/year" : "/month";
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
