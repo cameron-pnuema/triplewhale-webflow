@@ -653,19 +653,25 @@ const handleSliderChange = (value) => {
   removeRecommendedClassFromCards();
   hideEnterpriseForm();
   hideAllCards();
-  
-  if (value >= 10000000) {
-    setPricesToCustom();
-    return;
-  }
 
-  if (value >= 5000000 && value < 10000000) {
+  if (value >= 10000000) {
+    // Show and recommend the Enterprise plan for 10M+
+    addRecommendedClass(getElement("enterprise-card"));
+    addRecommendedBorder(getElement("enterprise-card"));
+    lastRecommendedCard = "enterprise-card";
+    showCard(getElement("enterprise-card"));
+    showCard(getElement("pro-card"));
+    showCard(getElement("premium-card"));
+    showCard(getElement("premiumPlus-card"));
+    showEnterpriseForm();
+  } else if (value >= 5000000 && value < 10000000) {
     // Show and recommend the Premium plan for 5-10M
     addRecommendedClass(getElement("premium-card"));
     addRecommendedBorder(getElement("premium-card"));
     lastRecommendedCard = "premium-card";
     showCard(getElement("premium-card"));
     showCard(getElement("premiumPlus-card"));
+    showCard(getElement("pro-card"));
   } else if (value >= 1000000 && value < 5000000) {
     // Show and recommend the Pro plan for 1-5M
     addRecommendedClass(getElement("pro-card"));
@@ -692,6 +698,7 @@ const handleSliderChange = (value) => {
   const supportTexts = getAdditionalSupportText(value);
   setAdditionalSupportText(supportTexts);
 };
+
 
 
 
