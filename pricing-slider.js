@@ -657,15 +657,16 @@ const handleSliderChange = (value) => {
 
   if (value >= 10000000) {
     // Show and recommend the Enterprise plan for 10M+
+    showCard(getElement("enterprise-card"));
     setPricesToCustom();
     addRecommendedClass(getElement("enterprise-card"));
     addRecommendedBorder(getElement("enterprise-card"));
     lastRecommendedCard = "enterprise-card";
-    showCard(getElement("enterprise-card"));
-    showCard(getElement("pro-card"));
-    showCard(getElement("premium-card"));
-    showCard(getElement("premiumPlus-card"));
-    showEnterpriseForm();
+    //showCard(getElement("enterprise-card"));
+   // showCard(getElement("pro-card"));
+   // showCard(getElement("premium-card"));
+   // showCard(getElement("premiumPlus-card"));
+   // showEnterpriseForm();
   } else if (value >= 5000000 && value < 10000000) {
     // Show and recommend the Premium plan for 5-10M
     addRecommendedClass(getElement("premium-card"));
@@ -674,27 +675,38 @@ const handleSliderChange = (value) => {
     showCard(getElement("premium-card"));
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
+    showCard(getElement("growth-card"));
+    showCard(getElement("free-card"));
   } else if (value >= 1000000 && value < 5000000) {
     // Show and recommend the Pro plan for 1-5M
     addRecommendedClass(getElement("pro-card"));
     addRecommendedBorder(getElement("pro-card"));
     lastRecommendedCard = "pro-card";
+    showCard(getElement("premium-card"));
+    showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
-    showCard(getElement("enterprise-card"));
+    showCard(getElement("growth-card"));
+    showCard(getElement("free-card"));
   } else if (value >= 500000 && value < 1000000) {
     // Show and recommend the Growth plan for 500K-1M
     addRecommendedClass(getElement("growth-card"));
     addRecommendedBorder(getElement("growth-card"));
     lastRecommendedCard = "growth-card";
-    showCard(getElement("growth-card"));
+    showCard(getElement("premium-card"));
+    showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
+    showCard(getElement("growth-card"));
+    showCard(getElement("free-card"));
   } else if (value < 500000) {
     // Show and recommend the Free plan for 0-500K
     addRecommendedClass(getElement("free-card"));
     addRecommendedBorder(getElement("free-card"));
     lastRecommendedCard = "free-card";
-    showCard(getElement("free-card"));
+    showCard(getElement("premium-card"));
+    showCard(getElement("premiumPlus-card"));
+    showCard(getElement("pro-card"));
     showCard(getElement("growth-card"));
+    showCard(getElement("free-card"));
   }
 
   const supportTexts = getAdditionalSupportText(value);
