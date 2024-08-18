@@ -550,7 +550,7 @@ let currentRange = "0-250K";
 
 const setCardsPriceValue = (range = currentRange) => {
   currentRange = range;
-  if (range === "50M+") {
+  if (range === "10M+" || range === "15-20M" || range === "20-30M" || range === "30-40M" || range === "40-50M" || range === "50M+") {
     setPricesToCustom();
     return;
   }
@@ -565,7 +565,7 @@ const setCardsPriceValue = (range = currentRange) => {
 };
 
 
-const handleSliderChange = (value) => {
+/* const handleSliderChange = (value) => {
   const ctaOfGrowth = getElement("growth-card").querySelector(".card-demo-btn");
 
   removeRecommendedClassFromCards();
@@ -573,6 +573,67 @@ const handleSliderChange = (value) => {
   hideAllCards();
   if (value >= 5000000) {
     // show enterprise, pro, premium, and premiumPlus for price >= 5 Million
+    showCard(getElement("enterprise-card"));
+    showCard(getElement("pro-card"));
+    showCard(getElement("premium-card"));
+    showCard(getElement("premiumPlus-card"));
+    addRecommendedClass(getElement("enterprise-card"));
+    addRecommendedBorder(getElement("enterprise-card"));
+    lastRecommendedCard = "enterprise-card";
+    showEnterpriseForm();
+  } else {
+    if (value < 500000) {
+      ctaOfGrowth.innerText = "Get Started";
+      ctaOfGrowth.setAttribute("href", "https://app.triplewhale.com/signup");
+    } else if (value < 1000000) {
+      ctaOfGrowth.innerText = "Get Started";
+      ctaOfGrowth.setAttribute("href", "https://app.triplewhale.com/signup");
+    }
+    decreaseCardSize(getElement("enterprise-card"));
+
+    if (value >= 1000000 && value < 5000000) {
+      showEnterpriseForm();
+      addRecommendedClass(getElement("pro-card"));
+      addRecommendedBorder(getElement("pro-card"));
+      lastRecommendedCard = "pro-card";
+      showCard(getElement("pro-card"));
+      showCard(getElement("enterprise-card"));
+      showCard(getElement("premium-card"));
+      showCard(getElement("premiumPlus-card"));
+    } else if (value >= 500000 && value < 1000000) {
+      addRecommendedClass(getElement("growth-card"));
+      addRecommendedBorder(getElement("growth-card"));
+      lastRecommendedCard = "growth-card";
+      showCard(getElement("growth-card"));
+      showCard(getElement("pro-card"));
+      showCard(getElement("premium-card"));
+      showCard(getElement("premiumPlus-card"));
+    } else if (value < 500000) {
+      addRecommendedClass(getElement("free-card"));
+      addRecommendedBorder(getElement("free-card"));
+      lastRecommendedCard = "free-card";
+      showCard(getElement("free-card"));
+      showCard(getElement("growth-card"));
+    }
+  }
+
+  const supportTexts = getAdditionalSupportText(value);
+  setAdditionalSupportText(supportTexts);
+};
+*/
+const handleSliderChange = (value) => {
+  const ctaOfGrowth = getElement("growth-card").querySelector(".card-demo-btn");
+
+  removeRecommendedClassFromCards();
+  hideEnterpriseForm();
+  hideAllCards();
+  
+  if (value >= 10000000) {
+    setPricesToCustom();
+    return;
+  }
+
+  if (value >= 5000000) {
     showCard(getElement("enterprise-card"));
     showCard(getElement("pro-card"));
     showCard(getElement("premium-card"));
