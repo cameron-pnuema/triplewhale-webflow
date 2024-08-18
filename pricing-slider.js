@@ -571,6 +571,7 @@ const setAdditionalSupportText = (supports) => {
   });
 };
 
+
 /** helper functions end */
 let currentRange = "0-250K";
 
