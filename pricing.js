@@ -550,7 +550,7 @@ let currentRange = "0-250K";
 
 const setCardsPriceValue = (range = currentRange) => {
   currentRange = range;
-  if (range === "10-15M" || range === "15-20M" || range === "20-30M" || range === "30-40M" || range === "40-50M" || range === "50M+") {
+  if (range === "10M+" || range === "15-20M" || range === "20-30M" || range === "30-40M" || range === "40-50M" || range === "50M+") {
     setPricesToCustom();
     return;
   }
@@ -563,6 +563,7 @@ const setCardsPriceValue = (range = currentRange) => {
     setYearlyPrices(growth, pro, enterprise, creative_cockpit, premium, premiumPlus);
   }
 };
+
 
 
 /* const handleSliderChange = (value) => {
@@ -633,54 +634,40 @@ const handleSliderChange = (value) => {
     return;
   }
 
-  if (value >= 5000000) {
-    showCard(getElement("enterprise-card"));
-    showCard(getElement("pro-card"));
+  if (value >= 5000000 && value < 10000000) {
+    // Show and recommend the Premium plan for 5-10M
+    addRecommendedClass(getElement("premium-card"));
+    addRecommendedBorder(getElement("premium-card"));
+    lastRecommendedCard = "premium-card";
     showCard(getElement("premium-card"));
     showCard(getElement("premiumPlus-card"));
-    addRecommendedClass(getElement("enterprise-card"));
-    addRecommendedBorder(getElement("enterprise-card"));
-    lastRecommendedCard = "enterprise-card";
-    showEnterpriseForm();
-  } else {
-    if (value < 500000) {
-      ctaOfGrowth.innerText = "Get Started";
-      ctaOfGrowth.setAttribute("href", "https://app.triplewhale.com/signup");
-    } else if (value < 1000000) {
-      ctaOfGrowth.innerText = "Get Started";
-      ctaOfGrowth.setAttribute("href", "https://app.triplewhale.com/signup");
-    }
-    decreaseCardSize(getElement("enterprise-card"));
-
-    if (value >= 1000000 && value < 5000000) {
-      showEnterpriseForm();
-      addRecommendedClass(getElement("pro-card"));
-      addRecommendedBorder(getElement("pro-card"));
-      lastRecommendedCard = "pro-card";
-      showCard(getElement("pro-card"));
-      showCard(getElement("enterprise-card"));
-      showCard(getElement("premium-card"));
-      showCard(getElement("premiumPlus-card"));
-    } else if (value >= 500000 && value < 1000000) {
-      addRecommendedClass(getElement("growth-card"));
-      addRecommendedBorder(getElement("growth-card"));
-      lastRecommendedCard = "growth-card";
-      showCard(getElement("growth-card"));
-      showCard(getElement("pro-card"));
-      showCard(getElement("premium-card"));
-      showCard(getElement("premiumPlus-card"));
-    } else if (value < 500000) {
-      addRecommendedClass(getElement("free-card"));
-      addRecommendedBorder(getElement("free-card"));
-      lastRecommendedCard = "free-card";
-      showCard(getElement("free-card"));
-      showCard(getElement("growth-card"));
-    }
+  } else if (value >= 1000000 && value < 5000000) {
+    // Show and recommend the Pro plan for 1-5M
+    addRecommendedClass(getElement("pro-card"));
+    addRecommendedBorder(getElement("pro-card"));
+    lastRecommendedCard = "pro-card";
+    showCard(getElement("pro-card"));
+    showCard(getElement("enterprise-card"));
+  } else if (value >= 500000 && value < 1000000) {
+    // Show and recommend the Growth plan for 500K-1M
+    addRecommendedClass(getElement("growth-card"));
+    addRecommendedBorder(getElement("growth-card"));
+    lastRecommendedCard = "growth-card";
+    showCard(getElement("growth-card"));
+    showCard(getElement("pro-card"));
+  } else if (value < 500000) {
+    // Show and recommend the Free plan for 0-500K
+    addRecommendedClass(getElement("free-card"));
+    addRecommendedBorder(getElement("free-card"));
+    lastRecommendedCard = "free-card";
+    showCard(getElement("free-card"));
+    showCard(getElement("growth-card"));
   }
 
   const supportTexts = getAdditionalSupportText(value);
   setAdditionalSupportText(supportTexts);
 };
+
 
 
 const showDropdown = () => {
@@ -1016,14 +1003,12 @@ const determineRevenueRange = (value) => {
 */
 const determineRevenueRange = (value) => {
   if (value >= 10000000) return "10M+";
-  if (value >= 7500000) return "7.5-10M";
-  if (value >= 5000000) return "5-7.5M";
-  if (value >= 2500000) return "2.5-5M";
-  if (value >= 1000000) return "1-2.5M";
-  if (value >= 500000) return "500-1M";
-  if (value >= 250000) return "250-500K";
-  return "0-250K";
+  if (value >= 5000000) return "5-10M";
+  if (value >= 1000000) return "1-5M";
+  if (value >= 500000) return "500K-1M";
+  return "0-500K";
 };
+
 
 
 // Function to update the pricing based on the value
