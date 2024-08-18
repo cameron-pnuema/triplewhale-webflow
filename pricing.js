@@ -550,7 +550,7 @@ let currentRange = "0-250K";
 
 const setCardsPriceValue = (range = currentRange) => {
   currentRange = range;
-  if (range === "10M+" || range === "15-20M" || range === "20-30M" || range === "30-40M" || range === "40-50M" || range === "50M+") {
+  if (range === "10-15M" || range === "15-20M" || range === "20-30M" || range === "30-40M" || range === "40-50M" || range === "50M+") {
     setPricesToCustom();
     return;
   }
