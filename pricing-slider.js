@@ -358,7 +358,7 @@ const showEnterpriseForm = () => {
 };
 
 const decreaseCardSize = (card) => {
-  card.classList.add("hide-card");
+  card.classList.add("hide-this");
   card.querySelector(".card-icon-wrap").classList.add("vertical");
   card.querySelector(".card-overview").classList.add("hide");
   card.classList.remove("form-visible");
@@ -369,7 +369,7 @@ let isFirstLoad;
 let currentlyShowingCard = "free-card";
 
 const showCard = (card) => {
-  card.classList.remove("hide-card");
+  card.classList.remove("hide-this");
   card.querySelector(".card-icon-wrap").classList.remove("vertical");
   card.querySelector(".card-overview").classList.remove("hide");
 
