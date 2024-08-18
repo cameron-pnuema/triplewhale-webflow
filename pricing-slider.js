@@ -2,7 +2,6 @@
  * Pricing values
  */
 
-
 let selectedDuration = "yearly";
 let isAddonEnabled = true;
 let monthly_option = !0;
