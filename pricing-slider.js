@@ -584,6 +584,27 @@ const hideRecClassElements = (value) => {
   }
 };
 
+const toggleEnterpriseTagElements = (value) => {
+  const hideElements = document.querySelectorAll('[enterprise-tag="hide"]');
+  const showElements = document.querySelectorAll('[enterprise-tag="show"]');
+
+  if (value >= 10000000) {
+    hideElements.forEach((element) => {
+      element.style.display = 'none';
+    });
+    showElements.forEach((element) => {
+      element.style.display = '';
+    });
+  } else {
+    hideElements.forEach((element) => {
+      element.style.display = '';
+    });
+    showElements.forEach((element) => {
+      element.style.display = 'none';
+    });
+  }
+};
+
 
 /** helper functions end */
 let currentRange = "0-250K";
@@ -670,6 +691,8 @@ const handleSliderChange = (value) => {
   hideAllCards();
   // Call the function to hide rec-class elements if below 500K
   hideRecClassElements(value);
+  // Call the function to toggle elements based on the enterprise-tag attribute
+  toggleEnterpriseTagElements(value);
 
   if (value >= 10000000) {
     // Show and recommend the Enterprise plan for 10M+
