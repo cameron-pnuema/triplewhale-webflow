@@ -371,30 +371,34 @@ const freeCard = getElement("free-card");
 const growthCard = getElement("growth-card");
 const proCard = getElement("pro-card");
 const enterpriseCard = getElement("enterprise-card");
+const premiumCard = getElement("premium-card");
+const premiumPlusCard = getElement("premiumPlus-card");
 
 const hideAllCards = () => {
-  [freeCard, growthCard, proCard, enterpriseCard].forEach(decreaseCardSize);
+  [freeCard, growthCard, proCard, enterpriseCard, premiumCard, premiumPlusCard].forEach(decreaseCardSize);
   hideEnterpriseForm();
 };
+
 const showAllCards = () => {
-  [freeCard, growthCard, proCard].forEach(showCard);
+  [freeCard, growthCard, proCard, premiumCard, premiumPlusCard].forEach(showCard);
   hideEnterpriseForm();
 };
 
 const removeRecommendedClassFromCards = () => {
-  [freeCard, growthCard, proCard, enterpriseCard].forEach((card) => {
+  [freeCard, growthCard, proCard, enterpriseCard, premiumCard, premiumPlusCard].forEach((card) => {
     card.classList.remove("recommended-card");
   });
 };
 
 const removeRecommendedBorderFromCards = () => {
-  [freeCard, growthCard, proCard, enterpriseCard].forEach((card) => {
+  [freeCard, growthCard, proCard, enterpriseCard, premiumCard, premiumPlusCard].forEach((card) => {
     card.classList.remove("recommended-border");
   });
 };
 
 const addRecommendedClass = (el) => el.classList.add("recommended-card");
 const addRecommendedBorder = (el) => el.classList.add("recommended-border");
+
 
 /**
  * Logic to set card prices
@@ -410,10 +414,10 @@ let index = 12;
 const growthPriceNodes = getElements("growth-price");
 const proPriceNodes = getElements("pro-price");
 const enterprisePriceNodes = getElements("enterprise-price");
-const durationNodes = getElements("duration");
-const currencyNodes = getElements("currency");
 const premiumPriceNodes = getElements("premium-price");
 const premiumPlusPriceNodes = getElements("premiumPlus-price");
+const durationNodes = getElements("duration");
+const currencyNodes = getElements("currency");
 
 const setPrice = (node, price) => {
   node.innerText = price === "Custom" ? "Custom" : addCommas(price);
@@ -434,7 +438,7 @@ const setPricesToCustom = () => {
   setAddonCost("Custom");
 };
 
-const setYearlyPrices = (growth, pro, enterprise, creative_cockpit, premium, premiumPlus) => {
+const setYearlyPrices = (growth, pro, enterprise, premium, premiumPlus, creative_cockpit) => {
   let duration = selectedDuration === "yearly" ? "/year" : "/month";
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
@@ -451,7 +455,7 @@ const setYearlyPrices = (growth, pro, enterprise, creative_cockpit, premium, pre
   //   setTotalCost(selectedTabPrice, isEnterprise);
 };
 
-const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit, premium, premiumPlus) => {
+const setMonthlyPrices = (growth, pro, enterprise, premium, premiumPlus, creative_cockpit) => {
   let duration = selectedDuration === "yearly" ? "/year" : "/month";
   growthPriceNodes.forEach((node) => setPrice(node, growth));
   proPriceNodes.forEach((node) => setPrice(node, pro));
@@ -860,21 +864,22 @@ function setDefaultPriceElements() {
   toggleDontToggleVisibility(true); // Make the div visible
 }
 
-function updatePriceElements(growth, pro, enterprise) {
-  const growthPrices = document.querySelectorAll(
-    '[fd-custom-code="growth-price"]'
-  );
+function updatePriceElements(growth, pro, enterprise, premium, premiumPlus) {
+  const growthPrices = document.querySelectorAll('[fd-custom-code="growth-price"]');
   const proPrices = document.querySelectorAll('[fd-custom-code="pro-price"]');
-  const enterprisePrices = document.querySelectorAll(
-    '[fd-custom-code="enterprise-price"]'
-  );
+  const enterprisePrices = document.querySelectorAll('[fd-custom-code="enterprise-price"]');
+  const premiumPrices = document.querySelectorAll('[fd-custom-code="premium-price"]');
+  const premiumPlusPrices = document.querySelectorAll('[fd-custom-code="premiumPlus-price"]');
 
   growthPrices.forEach((node) => (node.innerText = growth));
   proPrices.forEach((node) => (node.innerText = pro));
   enterprisePrices.forEach((node) => (node.innerText = enterprise));
+  premiumPrices.forEach((node) => (node.innerText = premium));
+  premiumPlusPrices.forEach((node) => (node.innerText = premiumPlus));
 
   toggleDontToggleVisibility(false); // Hide the div when prices are updated
 }
+
 
 //
 document.addEventListener("DOMContentLoaded", function () {
@@ -894,11 +899,12 @@ allOptions.forEach((option) => {
     getElement("selected-price").innerText = `${option.innerText}`;
     getElement("selected-price-wrapper").classList.remove("is-open");
     handleSliderChange(priceVal);
-    const { growth, pro, enterprise } = setCardsPriceValue(range);
-    updatePriceElements(growth, pro, enterprise);
+    const { growth, pro, enterprise, premium, premiumPlus } = setCardsPriceValue(range);
+    updatePriceElements(growth, pro, enterprise, premium, premiumPlus);
     getElement("pricing-dropdowns").style.display = "none";
   });
 });
+
 
 /**
  * Function Calls
