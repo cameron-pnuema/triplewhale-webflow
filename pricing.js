@@ -997,6 +997,7 @@ function formatNumber(number) {
 }
 
 // Function to determine the revenue range based on the value
+/*
 const determineRevenueRange = (value) => {
   if (value >= 50000000) return "50M+";
   if (value >= 40000000) return "40-50M";
@@ -1012,6 +1013,18 @@ const determineRevenueRange = (value) => {
   if (value >= 250000) return "250-500K";
   return "0-250K";
 };
+*/
+const determineRevenueRange = (value) => {
+  if (value >= 10000000) return "10M+";
+  if (value >= 7500000) return "7.5-10M";
+  if (value >= 5000000) return "5-7.5M";
+  if (value >= 2500000) return "2.5-5M";
+  if (value >= 1000000) return "1-2.5M";
+  if (value >= 500000) return "500-1M";
+  if (value >= 250000) return "250-500K";
+  return "0-250K";
+};
+
 
 // Function to update the pricing based on the value
 const updatePricingBasedOnValue = (value) => {
