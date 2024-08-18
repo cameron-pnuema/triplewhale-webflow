@@ -294,6 +294,7 @@ const getMonthlyPrices = (range) => {
   };
 };
 
+/*
 const getYearlyPrices = (range) => {
   const {
     yearly: { growth, pro, enterprise, creative_cockpit, premium, premiumPlus },
@@ -307,7 +308,30 @@ const getYearlyPrices = (range) => {
     premiumPlus,
   };
 };
+*/
+const getYearlyPrices = (range) => {
+  if (!prices[range] || !prices[range].yearly) {
+    console.error(`No yearly pricing data found for range: ${range}`);
+    return {
+      growth: 'N/A',
+      pro: 'N/A',
+      enterprise: 'N/A',
+      creative_cockpit: 'N/A',
+      premium: 'N/A',
+      premiumPlus: 'N/A'
+    };
+  }
 
+  const { yearly } = prices[range];
+  return {
+    growth: yearly.growth || 'N/A',
+    pro: yearly.pro || 'N/A',
+    enterprise: yearly.enterprise || 'N/A',
+    creative_cockpit: yearly.creative_cockpit || 'N/A',
+    premium: yearly.premium || 'N/A',
+    premiumPlus: yearly.premiumPlus || 'N/A'
+  };
+};
 
 /**
  * Global Helper Functions
