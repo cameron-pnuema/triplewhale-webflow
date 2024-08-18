@@ -55,8 +55,8 @@ const prices = {
       pro: 1990,
       enterprise: 2790,
       creative_cockpit: 790,
-      premium: 2808,
-      premiumPlus: 4824,
+      premium: 234 * 12,
+      premiumPlus: 402 * 12,
     },
   },
   "250-500K": {
@@ -73,8 +73,8 @@ const prices = {
       pro: 2990,
       enterprise: 3790,
       creative_cockpit: 990,
-      premium: 3816,
-      premiumPlus: 6840,
+      premium: 318 * 12,
+      premiumPlus: 570 * 12,
     },
   },
   "500-1M": {
@@ -91,8 +91,8 @@ const prices = {
       pro: 3990,
       enterprise: 4990,
       creative_cockpit: 990,
-      premium: 5028,
-      premiumPlus: 9048,
+      premium: 419 * 12,
+      premiumPlus: 754 * 12,
     },
   },
   "1-2.5M": {
@@ -109,8 +109,8 @@ const prices = {
       pro: 4990,
       enterprise: 5990,
       creative_cockpit: 1490,
-      premium: 6036,
-      premiumPlus: 11064,
+      premium: 503 * 12,
+      premiumPlus: 922 * 12,
     },
   },
   "2.5-5M": {
@@ -127,8 +127,8 @@ const prices = {
       pro: 6490,
       enterprise: 7990,
       creative_cockpit: 1990,
-      premium: 8052,
-      premiumPlus: 14592,
+      premium: 671 * 12,
+      premiumPlus: 1216 * 12,
     },
   },
   "5-7.5M": {
@@ -145,8 +145,8 @@ const prices = {
       pro: 9990,
       enterprise: 11490,
       creative_cockpit: 2490,
-      premium: 11580,
-      premiumPlus: 21648,
+      premium: 965 * 12,
+      premiumPlus: 1804 * 12,
     },
   },
   "7.5-10M": {
@@ -163,8 +163,8 @@ const prices = {
       pro: 12990,
       enterprise: 14990,
       creative_cockpit: 2990,
-      premium: 15108,
-      premiumPlus: 28200,
+      premium: 1259 * 12,
+      premiumPlus: 2350 * 12,
     },
   },
   "10-15M": {
@@ -181,8 +181,8 @@ const prices = {
       pro: 16990,
       enterprise: 19990,
       creative_cockpit: 3990,
-      premium: 20148,
-      premiumPlus: 37272,
+      premium: 1679 * 12,
+      premiumPlus: 3106 * 12,
     },
   },
   "15-20M": {
@@ -199,8 +199,8 @@ const prices = {
       pro: 19990,
       enterprise: 24990,
       creative_cockpit: 4990,
-      premium: 25188,
-      premiumPlus: 45336,
+      premium: 2099 * 12,
+      premiumPlus: 3778 * 12,
     },
   },
   "20-30M": {
@@ -217,8 +217,8 @@ const prices = {
       pro: 24990,
       enterprise: 31990,
       creative_cockpit: 5990,
-      premium: 32244,
-      premiumPlus: 57432,
+      premium: 2687 * 12,
+      premiumPlus: 4786 * 12,
     },
   },
   "30-40M": {
@@ -235,8 +235,8 @@ const prices = {
       pro: 31990,
       enterprise: 37990,
       creative_cockpit: 6990,
-      premium: 39292,
-      premiumPlus: 70536,
+      premium: 3191 * 12,
+      premiumPlus: 5878 * 12,
     },
   },
   "40-50M": {
@@ -253,8 +253,8 @@ const prices = {
       pro: 37990,
       enterprise: 44990,
       creative_cockpit: 7990,
-      premium: 45348,
-      premiumPlus: 83640,
+      premium: 3779 * 12,
+      premiumPlus: 6970 * 12,
     },
   },
   "50M+": {
@@ -276,6 +276,7 @@ const prices = {
     },
   },
 };
+
 
 
 const getMonthlyPrices = (range) => {
