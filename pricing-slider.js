@@ -706,7 +706,18 @@ const handleSliderChange = (value) => {
    // showCard(getElement("premium-card"));
    // showCard(getElement("premiumPlus-card"));
    // showEnterpriseForm();
-  } else if (value >= 5000000 && value < 10000000) {
+    
+  } else if (value >= 7500000 && value < 10000000) {
+    // Recommend Premium Plus+ for 7.5M - 10M
+    addRecommendedClass(getElement("premiumPlus-card"));
+    addRecommendedBorder(getElement("premiumPlus-card"));
+    lastRecommendedCard = "premiumPlus-card";
+    showCard(getElement("premiumPlus-card"));
+    showCard(getElement("premium-card"));
+    showCard(getElement("pro-card"));
+    showCard(getElement("growth-card"));
+    showCard(getElement("free-card"));
+  } else if (value >= 5000000 && value < 7500000) {
     // Show and recommend the Premium plan for 5-10M
     addRecommendedClass(getElement("premium-card"));
     addRecommendedBorder(getElement("premium-card"));
