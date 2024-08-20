@@ -451,7 +451,7 @@ const setPrice = (node, price) => {
 
 // const setAddonCost = (creative_cockpit) => {
 //   getElement("addon-cost").innerText = `$${creative_cockpit}`;
-};
+// };
 const setPricesToCustom = () => {
   growthPriceNodes.forEach((node) => setPrice(node, "Custom"));
   proPriceNodes.forEach((node) => setPrice(node, "Custom"));
