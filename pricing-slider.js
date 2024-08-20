@@ -9,7 +9,7 @@ let lastClickedCard = "";
 let lastRecommendedCard = "free-card";
 
 const additionalSupports = {
-  999999: ["Live Chat", "Group Onboarding", "Weekly Product Training Sessions"],
+  500000: ["Live Chat", "Group Onboarding", "Weekly Product Training Sessions"],
   1000000: [
     "Live Chat",
     "Implementation Specialist (1:1 Onboarding)",
@@ -625,6 +625,19 @@ const setCardsPriceValue = (range = currentRange) => {
   }
 };
 
+const setBookDemoLink = () => {
+  const notCustomButton = document.getElementById("not-custom-button");
+  if (notCustomButton) {
+    notCustomButton.setAttribute("href", "https://www.triplewhale.com/bookdemo");
+  }
+};
+const setSignupFreeLink = () => {
+  const notCustomButton = document.getElementById("not-custom-button");
+  if (notCustomButton) {
+    notCustomButton.setAttribute("href", "https://app.triplewhale.com/signup-free");
+  }
+};
+
 
 
 /* const handleSliderChange = (value) => {
@@ -717,6 +730,7 @@ const handleSliderChange = (value) => {
     showCard(getElement("pro-card"));
     showCard(getElement("growth-card"));
     showCard(getElement("free-card"));
+    setBookDemoLink(); 
   } else if (value >= 5000000 && value < 7500000) {
     // Show and recommend the Premium plan for 5-10M
     addRecommendedClass(getElement("premium-card"));
@@ -727,6 +741,7 @@ const handleSliderChange = (value) => {
     showCard(getElement("pro-card"));
     showCard(getElement("growth-card"));
     showCard(getElement("free-card"));
+    setBookDemoLink(); 
   } else if (value >= 1000000 && value < 5000000) {
     // Show and recommend the Pro plan for 1-5M
     addRecommendedClass(getElement("pro-card"));
@@ -737,6 +752,7 @@ const handleSliderChange = (value) => {
     showCard(getElement("pro-card"));
     showCard(getElement("growth-card"));
     showCard(getElement("free-card"));
+    setBookDemoLink(); 
   } else if (value >= 500000 && value < 1000000) {
     // Show and recommend the Growth plan for 500K-1M
     addRecommendedClass(getElement("growth-card"));
@@ -747,8 +763,10 @@ const handleSliderChange = (value) => {
     showCard(getElement("pro-card"));
     showCard(getElement("growth-card"));
     showCard(getElement("free-card"));
+    setBookDemoLink(); 
   } else if (value < 500000) {
     // Show and recommend the Free plan for 0-500K
+    setSignupFreeLink();
     addRecommendedClass(getElement("free-card"));
     addRecommendedBorder(getElement("free-card"));
     lastRecommendedCard = "free-card";
