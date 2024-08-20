@@ -1,7 +1,6 @@
 /**
  * Pricing values
  */
-
 let selectedDuration = "yearly";
 let isAddonEnabled = true;
 let monthly_option = !0;
@@ -35,7 +34,6 @@ const additionalSupports = {
     "Weekly Product Training Sessions",
   ],
 };
-
 
 const revenue_levels = [
   49999999, 39999999, 29999999, 19999999, 14999999, 9999999, 7499999, 4999999,
