@@ -924,6 +924,7 @@ const addToggleListener = () => {
   });
 };
 
+/*
 const addAddonClickListener = () => {
   let isOn = true;
   const addOnToggle = document.getElementById("tw-toggle-add-on-cc");
@@ -944,6 +945,7 @@ const addAddonClickListener = () => {
     // setTotalCost(selectedTabPrice, isEnterprise);
   });
 };
+*/
 
 const addTabClickListener = () => {
   const tabs = document.querySelectorAll(
@@ -1064,7 +1066,7 @@ addToggleListener();
 
 setCardsPriceValue(currentRange);
 
-addAddonClickListener();
+// addAddonClickListener();
 
 addTabClickListener();
 
