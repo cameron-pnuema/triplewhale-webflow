@@ -544,6 +544,7 @@ const getSelectedTabPrice = () => {
   };
 };
 
+
 const getAdditionalSupportText = (value) => {
   const thresholds = [500000, 1000000, 5000000, 10000000, 50000000];
   const defaultThreshold = 50000000;
