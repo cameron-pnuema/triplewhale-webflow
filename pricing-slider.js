@@ -9,7 +9,7 @@ let lastClickedCard = "";
 let lastRecommendedCard = "free-card";
 
 const additionalSupports = {
-  990000: ["Live Chat", "Group Onboarding", "Weekly Product Training Sessions"],
+  999999: ["Live Chat", "Group Onboarding", "Weekly Product Training Sessions"],
   1000000: [
     "Live Chat",
     "Implementation Specialist (1:1 Onboarding)",
