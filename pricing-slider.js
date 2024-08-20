@@ -554,6 +554,7 @@ const getAdditionalSupportText = (value) => {
     thresholds.find((threshold) => value < threshold) || defaultThreshold;
   if (value >= 500000 && value < 1000000) {
     return additionalSupports[500000];
+  }
   return additionalSupports[selectedThreshold];
 };
 
