@@ -449,8 +449,8 @@ const setPrice = (node, price) => {
   node.setAttribute("price", price);
 };
 
-const setAddonCost = (creative_cockpit) => {
-  getElement("addon-cost").innerText = `$${creative_cockpit}`;
+// const setAddonCost = (creative_cockpit) => {
+//   getElement("addon-cost").innerText = `$${creative_cockpit}`;
 };
 const setPricesToCustom = () => {
   growthPriceNodes.forEach((node) => setPrice(node, "Custom"));
@@ -463,7 +463,7 @@ const setPricesToCustom = () => {
   currencyNodes.forEach((node) => (node.innerText = ""));
 
   //   setTotalCost("Custom", false);
-  setAddonCost("Custom");
+  // setAddonCost("Custom");
 };
 
 const setYearlyPrices = (growth, pro, enterprise, creative_cockpit, premium, premiumPlus) => {
@@ -477,7 +477,7 @@ const setYearlyPrices = (growth, pro, enterprise, creative_cockpit, premium, pre
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
-  setAddonCost(creative_cockpit);
+  // setAddonCost(creative_cockpit);
   /** set total cost */
   //   const { selectedTabPrice, isEnterprise } = getSelectedTabPrice();
   //   setTotalCost(selectedTabPrice, isEnterprise);
@@ -494,7 +494,7 @@ const setMonthlyPrices = (growth, pro, enterprise, creative_cockpit, premium, pr
   currencyNodes.forEach((node) => (node.innerText = "$"));
 
   /** set addon cost */
-  setAddonCost(creative_cockpit);
+  // setAddonCost(creative_cockpit);
 
   /** set total cost */
   //   const { selectedTabPrice, isEnterprise } = getSelectedTabPrice();
