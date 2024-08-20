@@ -9,7 +9,7 @@ let lastClickedCard = "";
 let lastRecommendedCard = "free-card";
 
 const additionalSupports = {
-  500000: ["Live Chat", "Group Onboarding", "Weekly Product Training Sessions"],
+  990000: ["Live Chat", "Group Onboarding", "Weekly Product Training Sessions"],
   1000000: [
     "Live Chat",
     "Implementation Specialist (1:1 Onboarding)",
@@ -562,7 +562,7 @@ const setAdditionalSupportText = (supports) => {
       div.classList.add("card-list-flex");
       div.innerHTML = `
       <img src="https://assets-global.website-files.com/61bcbae3ae2e8ee49aa790b0/651ad7899a658b656c548cd9_647606ad31337d3beb5e2cc5_check-icon-brix-templates.svg.svg"
-      loading="lazy" alt=""  class="tick-icon">
+      loading="lazy" alt="" >
       <div>${support}</div>
       `;
       node.appendChild(div);
