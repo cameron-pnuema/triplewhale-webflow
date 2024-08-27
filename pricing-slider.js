@@ -733,8 +733,8 @@ const handleSliderChange = (value) => {
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("premium-card"));
     showCard(getElement("pro-card"));
-    showCard(getElement("growth-card"));
-    showCard(getElement("free-card"));
+    //showCard(getElement("growth-card"));
+    //showCard(getElement("free-card"));
     setBookDemoLink(); 
   } else if (value >= 5000000 && value < 7500000) {
     // Show and recommend the Premium plan for 5-10M
@@ -744,8 +744,8 @@ const handleSliderChange = (value) => {
     showCard(getElement("premium-card"));
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
-    showCard(getElement("growth-card"));
-    showCard(getElement("free-card"));
+    //showCard(getElement("growth-card"));
+    //showCard(getElement("free-card"));
     setBookDemoLink(); 
   } else if (value >= 1000000 && value < 5000000) {
     // Show and recommend the Pro plan for 1-5M
@@ -755,8 +755,8 @@ const handleSliderChange = (value) => {
     showCard(getElement("premium-card"));
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
-    showCard(getElement("growth-card"));
-    showCard(getElement("free-card"));
+    //showCard(getElement("growth-card"));
+    //showCard(getElement("free-card"));
     setBookDemoLink(); 
   } else if (value >= 500000 && value < 1000000) {
     // Show and recommend the Growth plan for 500K-1M
@@ -767,7 +767,7 @@ const handleSliderChange = (value) => {
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
     showCard(getElement("growth-card"));
-    showCard(getElement("free-card"));
+    //showCard(getElement("free-card"));
     setBookDemoLink(); 
   } else if (value < 500000) {
     // Show and recommend the Free plan for 0-500K
