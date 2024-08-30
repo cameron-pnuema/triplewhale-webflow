@@ -649,12 +649,12 @@ function toggleGrowthCardClasses(value) {
 
   if (value >= 1000000) {
     // Add classes when value is 1M or above, only if they're not already there
-    if (!cardOverview.classList.contains('hide')) cardOverview.classList.add('hide');
+    if (!cardOverview.classList.contains('hide')) cardOverview.classList.add('remove-it');
     if (!cardIconWrap.classList.contains('vertic')) cardIconWrap.classList.add('vertic');
     if (!growthCard.classList.contains('collapse')) growthCard.classList.add('collapse');
   } else {
     // Remove classes when value is below 1M, only if they're there
-    if (cardOverview.classList.contains('hide')) cardOverview.classList.remove('hide');
+    if (cardOverview.classList.contains('hide')) cardOverview.classList.remove('remove-it');
     if (cardIconWrap.classList.contains('vertic')) cardIconWrap.classList.remove('vertic');
     if (growthCard.classList.contains('collapse')) growthCard.classList.remove('collapse');
   }
