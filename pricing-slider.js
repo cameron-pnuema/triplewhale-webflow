@@ -807,7 +807,6 @@ const handleSliderChange = (value) => {
 
 
 
-
 const showDropdown = () => {
   getElement("pricing-dropdowns").style.display = "block";
   getElement("selected-price-wrapper").classList.add("is-open");
