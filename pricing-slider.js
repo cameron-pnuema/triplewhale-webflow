@@ -277,7 +277,6 @@ const prices = {
 };
 
 
-
 const getMonthlyPrices = (range) => {
   const {
     monthly: { growth, pro, enterprise, creative_cockpit, premium, premiumPlus },
