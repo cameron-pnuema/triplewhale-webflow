@@ -677,6 +677,7 @@ function setupGrowthCardClickListener() {
 
 /* const handleSliderChange = (value) => {
   const ctaOfGrowth = getElement("growth-card").querySelector(".card-demo-btn");
+  //another useless comment
 
   removeRecommendedClassFromCards();
   hideEnterpriseForm();
