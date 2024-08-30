@@ -660,6 +660,21 @@ function toggleGrowthCardClasses(value) {
   }
 }
 
+function setupGrowthCardClickListener() {
+  const growthCard = getElement("growth-card");
+  
+  function removeGrowthCardClasses() {
+    const cardOverview = growthCard.querySelector('.card-overview');
+    const cardIconWrap = growthCard.querySelector('.card-icon-wrap');
+    
+    if (cardOverview.classList.contains('remove-it')) cardOverview.classList.remove('remove-it');
+    if (cardIconWrap.classList.contains('vertic')) cardIconWrap.classList.remove('vertic');
+    if (growthCard.classList.contains('collapse')) growthCard.classList.remove('collapse');
+  }
+
+  growthCard.addEventListener('click', removeGrowthCardClasses);
+}
+
 /* const handleSliderChange = (value) => {
   const ctaOfGrowth = getElement("growth-card").querySelector(".card-demo-btn");
 
@@ -1106,6 +1121,7 @@ addToggleListener();
 setCardsPriceValue(currentRange);
 
 // addAddonClickListener();
+setupGrowthCardClickListener();
 
 addTabClickListener();
 
