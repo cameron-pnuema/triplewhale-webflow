@@ -644,6 +644,7 @@ const setSignupFreeLink = () => {
   }
 };
 
+/*
 const toggleGrowthCardCollapse = (value) => {
   const growthCard = getElement("growth-card");
   const cardOverview = growthCard.querySelector('.card-overview');
@@ -661,7 +662,7 @@ const toggleGrowthCardCollapse = (value) => {
     growthCard.classList.remove('collapse');
   }
 };
-
+*/
 /* const handleSliderChange = (value) => {
   const ctaOfGrowth = getElement("growth-card").querySelector(".card-demo-btn");
 
@@ -729,7 +730,7 @@ const handleSliderChange = (value) => {
   // Call the function to toggle elements based on the enterprise-tag attribute
   toggleEnterpriseTagElements(value);
    // Call the new function to handle Growth card collapse
-  toggleGrowthCardCollapse(value);
+ // toggleGrowthCardCollapse(value);
 
   if (value >= 10000000) {
     // Show and recommend the Enterprise plan for 10M+
