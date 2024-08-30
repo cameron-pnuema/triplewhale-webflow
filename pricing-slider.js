@@ -643,25 +643,24 @@ const setSignupFreeLink = () => {
   }
 };
 
-/*
-const toggleGrowthCardCollapse = (value) => {
+function toggleGrowthCardClasses(value) {
   const growthCard = getElement("growth-card");
   const cardOverview = growthCard.querySelector('.card-overview');
   const cardIconWrap = growthCard.querySelector('.card-icon-wrap');
 
   if (value >= 1000000) {
-    // When value is 1M or above
-    cardOverview.classList.add('hide');
-    cardIconWrap.classList.add('vertic');
-    growthCard.classList.add('collapse');
+    // Add classes when value is 1M or above, only if they're not already there
+    if (!cardOverview.classList.contains('hide')) cardOverview.classList.add('hide');
+    if (!cardIconWrap.classList.contains('vertic')) cardIconWrap.classList.add('vertic');
+    if (!growthCard.classList.contains('collapse')) growthCard.classList.add('collapse');
   } else {
-    // When value is below 1M
-    cardOverview.classList.remove('hide');
-    cardIconWrap.classList.remove('vertic');
-    growthCard.classList.remove('collapse');
+    // Remove classes when value is below 1M, only if they're there
+    if (cardOverview.classList.contains('hide')) cardOverview.classList.remove('hide');
+    if (cardIconWrap.classList.contains('vertic')) cardIconWrap.classList.remove('vertic');
+    if (growthCard.classList.contains('collapse')) growthCard.classList.remove('collapse');
   }
-};
-*/
+}
+
 /* const handleSliderChange = (value) => {
   const ctaOfGrowth = getElement("growth-card").querySelector(".card-demo-btn");
 
@@ -729,7 +728,7 @@ const handleSliderChange = (value) => {
   // Call the function to toggle elements based on the enterprise-tag attribute
   toggleEnterpriseTagElements(value);
    // Call the new function to handle Growth card collapse
- // toggleGrowthCardCollapse(value);
+  toggleGrowthCardClasses(value);
 
   if (value >= 10000000) {
     // Show and recommend the Enterprise plan for 10M+
@@ -1157,6 +1156,7 @@ const updatePricingBasedOnValue = (value) => {
 
   // Determine what plan should be recommended
   handleSliderChange(value);
+  toggleGrowthCardClasses(value);
 };
 
 // Function to handle both formatting and pricing updates
@@ -1197,4 +1197,5 @@ if (targetNode) {
 const initialValue = parseInt(targetNode.textContent.replace(/,/g, ""), 10);
 if (!isNaN(initialValue)) {
   updatePricingBasedOnValue(initialValue);
+  toggleGrowthCardClasses(value);
 }
