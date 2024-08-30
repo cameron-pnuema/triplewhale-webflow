@@ -734,7 +734,7 @@ const handleSliderChange = (value) => {
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("premium-card"));
     showCard(getElement("pro-card"));
-    //showCard(getElement("growth-card"));
+    showCard(getElement("growth-card"));
     //showCard(getElement("free-card"));
     setBookDemoLink(); 
   } else if (value >= 5000000 && value < 7500000) {
@@ -745,7 +745,7 @@ const handleSliderChange = (value) => {
     showCard(getElement("premium-card"));
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
-    //showCard(getElement("growth-card"));
+    showCard(getElement("growth-card"));
     //showCard(getElement("free-card"));
     setBookDemoLink(); 
   } else if (value >= 1000000 && value < 5000000) {
@@ -756,7 +756,7 @@ const handleSliderChange = (value) => {
     showCard(getElement("premium-card"));
     showCard(getElement("premiumPlus-card"));
     showCard(getElement("pro-card"));
-    //showCard(getElement("growth-card"));
+    showCard(getElement("growth-card"));
     //showCard(getElement("free-card"));
     setBookDemoLink(); 
   } else if (value >= 500000 && value < 1000000) {
