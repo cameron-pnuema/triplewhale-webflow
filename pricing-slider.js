@@ -47,7 +47,7 @@ const prices = {
       enterprise: 279,
       creative_cockpit: 79,
       premium: 279,
-      premiumPlus: 478,
+      premiumPlus: 479,
     },
     yearly: {
       growth: 1290,
@@ -55,7 +55,7 @@ const prices = {
       enterprise: 2790,
       creative_cockpit: 790,
       premium: 2790,
-      premiumPlus: 402 * 12,
+      premiumPlus: 479 * 10,
     },
   },
   "250-500K": {
@@ -65,7 +65,7 @@ const prices = {
       enterprise: 379,
       creative_cockpit: 99,
       premium: 379,
-      premiumPlus: 678,
+      premiumPlus: 679,
     },
     yearly: {
       growth: 1990,
@@ -73,7 +73,7 @@ const prices = {
       enterprise: 3790,
       creative_cockpit: 990,
       premium: 3790,
-      premiumPlus: 570 * 12,
+      premiumPlus: 679 * 10,
     },
   },
   "500-1M": {
@@ -83,7 +83,7 @@ const prices = {
       enterprise: 499,
       creative_cockpit: 99,
       premium: 499,
-      premiumPlus: 898,
+      premiumPlus: 899,
     },
     yearly: {
       growth: 2990,
@@ -91,7 +91,7 @@ const prices = {
       enterprise: 4990,
       creative_cockpit: 990,
       premium: 4990,
-      premiumPlus: 754 * 12,
+      premiumPlus: 899 * 10,
     },
   },
   "1-2.5M": {
@@ -101,7 +101,7 @@ const prices = {
       enterprise: 599,
       creative_cockpit: 149,
       premium: 599,
-      premiumPlus: 1098,
+      premiumPlus: 1099,
     },
     yearly: {
       growth: 3990,
@@ -109,7 +109,7 @@ const prices = {
       enterprise: 5990,
       creative_cockpit: 1490,
       premium: 5990,
-      premiumPlus: 922 * 12,
+      premiumPlus: 1099 * 10,
     },
   },
   "2.5-5M": {
@@ -119,7 +119,7 @@ const prices = {
       enterprise: 799,
       creative_cockpit: 199,
       premium: 799,
-      premiumPlus: 1448,
+      premiumPlus: 1449,
     },
     yearly: {
       growth: 5990,
@@ -127,7 +127,7 @@ const prices = {
       enterprise: 7990,
       creative_cockpit: 1990,
       premium: 7990,
-      premiumPlus: 1216 * 12,
+      premiumPlus: 1449 * 10,
     },
   },
   "5-7.5M": {
@@ -137,7 +137,7 @@ const prices = {
       enterprise: 1149,
       creative_cockpit: 249,
       premium: 1149,
-      premiumPlus: 2148,
+      premiumPlus: 2149,
     },
     yearly: {
       growth: 7990,
@@ -145,7 +145,7 @@ const prices = {
       enterprise: 11490,
       creative_cockpit: 2490,
       premium: 11490,
-      premiumPlus: 1804 * 12,
+      premiumPlus: 2149 * 10,
     },
   },
   "7.5-10M": {
@@ -155,7 +155,7 @@ const prices = {
       enterprise: 1499,
       creative_cockpit: 299,
       premium: 1499,
-      premiumPlus: 2798,
+      premiumPlus: 2799,
     },
     yearly: {
       growth: 11490,
@@ -163,7 +163,7 @@ const prices = {
       enterprise: 14990,
       creative_cockpit: 2990,
       premium: 14990,
-      premiumPlus: 2350 * 12,
+      premiumPlus: 2799 * 10,
     },
   },
   "10-15M": {
